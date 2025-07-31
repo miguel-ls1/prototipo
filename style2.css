@@ -6,15 +6,15 @@
 */
  
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: url('logo.png') no-repeat center center fixed;
-    background-size: cover;
-    color: #f4eddc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-image: linear-gradient(180deg, #5f81a5, #0f2c47);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
  
 .overlay {
-    background-color: rgba(15, 44, 71, 0.9); /* Fundo semitransparente */
+    
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
@@ -30,6 +30,7 @@ body {
 header {
     text-align: center;
     margin-bottom: 30px;
+    
 }
  
 h1 {
@@ -40,7 +41,7 @@ h1 {
  
 p {
     font-size: 1.1em;
-    color: #dcd6c2;
+    color: #0f2c47;
 }
  
 main {
@@ -74,4 +75,28 @@ footer {
     text-align: center;
     margin-top: 40px;
     color: #f4eddc;
+}
+.cabeça{
+    max-height: 400px;
+    background-color:#f4eddc ;
+    border-radius: 10px;
+font-size: 30px;
+}
+.cabeça img{
+    box-shadow: #0f2c47 1px 1px 20px 1px;
+    border-radius: 50px;
+    align-items: center;
+    width: 300px;
+}
+.cabeça p{
+margin-top: -5px;
+
+}
+.card{
+    
+    background-color: #f4eddc;
+    width: 400px;
+}
+.card img{
+    width: 400px;
 }
