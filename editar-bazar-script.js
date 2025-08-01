@@ -1,4 +1,18 @@
-// Manipulação da imagem
+// Status toggle functionality
+const statusToggle = document.getElementById('statusToggle');
+const statusLabel = document.getElementById('statusLabel');
+
+statusToggle.addEventListener('change', function() {
+    if (this.checked) {
+        statusLabel.textContent = 'Ativo';
+        statusLabel.style.color = '#4CAF50';
+    } else {
+        statusLabel.textContent = 'Inativo';
+        statusLabel.style.color = '#f39c12';
+    }
+});
+
+// Image upload functionality
 document.getElementById('imageInput').addEventListener('change', function(e) {
     const file = e.target.files[0];
     const preview = document.getElementById('imagePreview');
@@ -13,7 +27,7 @@ document.getElementById('imageInput').addEventListener('change', function(e) {
     }
 });
 
-// Máscara para CEP
+// CEP mask
 document.getElementById('cep').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length <= 8) {
@@ -22,7 +36,7 @@ document.getElementById('cep').addEventListener('input', function(e) {
     }
 });
 
-// Máscara para telefone
+// Phone mask
 document.getElementById('telefone').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length <= 11) {
@@ -35,7 +49,7 @@ document.getElementById('telefone').addEventListener('input', function(e) {
     }
 });
 
-// Buscar endereço pelo CEP
+// CEP lookup
 document.getElementById('cep').addEventListener('blur', function(e) {
     const cep = e.target.value.replace(/\D/g, '');
     
@@ -44,9 +58,9 @@ document.getElementById('cep').addEventListener('blur', function(e) {
             .then(response => response.json())
             .then(data => {
                 if (!data.erro) {
-                    document.getElementById('endereco').value = data.logradouro || '';
-                    document.getElementById('bairro').value = data.bairro || '';
-                    document.getElementById('cidade').value = data.localidade || '';
+                    document.getElementById('endereco').value = data.logradouro || document.getElementById('endereco').value;
+                    document.getElementById('bairro').value = data.bairro || document.getElementById('bairro').value;
+                    document.getElementById('cidade').value = data.localidade || document.getElementById('cidade').value;
                 }
             })
             .catch(error => {
@@ -55,11 +69,11 @@ document.getElementById('cep').addEventListener('blur', function(e) {
     }
 });
 
-// Submissão do formulário
-document.getElementById('bazarForm').addEventListener('submit', function(e) {
+// Form submission
+document.getElementById('editBazarForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Validação básica
+    // Validation
     const requiredFields = ['nome', 'cep', 'endereco', 'bairro', 'cidade', 'descricao'];
     let isValid = true;
     
@@ -78,28 +92,47 @@ document.getElementById('bazarForm').addEventListener('submit', function(e) {
         return;
     }
     
-    // Simular salvamento
-    const submitBtn = document.querySelector('.submit-btn');
-    const originalText = submitBtn.innerHTML;
+    // Simulate saving
+    const saveBtn = document.querySelector('.save-btn');
+    const originalText = saveBtn.innerHTML;
     
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
-    submitBtn.disabled = true;
+    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
+    saveBtn.disabled = true;
     
     setTimeout(() => {
-        showMessage('Bazar adicionado com sucesso!', 'success');
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
+        showMessage('Bazar atualizado com sucesso!', 'success');
+        saveBtn.innerHTML = originalText;
+        saveBtn.disabled = false;
         
-        // Redirecionar para página principal após 2 segundos
+        // Redirect after 2 seconds
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = 'perfil.html';
         }, 2000);
     }, 1500);
 });
 
-// Função para mostrar mensagens
+// Delete bazar function
+function deletarBazar() {
+    if (confirm('Tem certeza que deseja excluir este bazar? Esta ação não pode ser desfeita.')) {
+        const deleteBtn = document.querySelector('.delete-btn');
+        const originalText = deleteBtn.innerHTML;
+        
+        deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Excluindo...';
+        deleteBtn.disabled = true;
+        
+        setTimeout(() => {
+            showMessage('Bazar excluído com sucesso!', 'success');
+            
+            setTimeout(() => {
+                window.location.href = 'perfil.html';
+            }, 1500);
+        }, 1000);
+    }
+}
+
+// Show message function
 function showMessage(text, type) {
-    // Remove mensagens existentes
+    // Remove existing messages
     const existingMessages = document.querySelectorAll('.success-message, .error-message');
     existingMessages.forEach(msg => msg.remove());
     
@@ -114,20 +147,30 @@ function showMessage(text, type) {
     const form = document.querySelector('.bazar-form');
     form.insertBefore(messageDiv, form.firstChild);
     
-    // Remove a mensagem após 5 segundos
+    // Remove message after 5 seconds
     setTimeout(() => {
         messageDiv.remove();
     }, 5000);
 }
 
-// Função para voltar à página principal
-function voltarPagina() {
-    if (confirm('Tem certeza que deseja sair? Os dados não salvos serão perdidos.')) {
-        window.location.href = 'index.html';
-    }
-}
-
-// Adicionar click no preview da imagem
+// Click on image preview to upload
 document.getElementById('imagePreview').addEventListener('click', function() {
     document.getElementById('imageInput').click();
+});
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', function() {
+    // Set initial status
+    statusLabel.style.color = statusToggle.checked ? '#4CAF50' : '#f39c12';
+    
+    // Add hover effects to stat items
+    document.querySelectorAll('.stat-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.style.transform = 'translateY(-3px) scale(1.02)';
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'translateY(0) scale(1)';
+        });
+    });
 });

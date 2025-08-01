@@ -1,63 +1,190 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FashionSpace - Bazares Online</title>
-    <link rel="stylesheet" href="style2.css">
-    <link rel="stylesheet" type="image/png" href="assets/Image.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style-main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-
 <body>
-    <div class="overlay">
-        <header class="cabeça">
-            <img src="assets/Image.png" alt="FashionSpace Logo" class="logo">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/Image.png" alt="Logo" class="sidebar-logo">
+            <h3>FashionSpace</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#home"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="#bazares"><i class="fas fa-store"></i> Bazares</a></li>
+            <li><a href="favoritos.html"><i class="fas fa-heart"></i> Favoritos</a></li>
+            <li><a href="#perfil"><i class="fas fa-user"></i> Perfil</a></li>
+            <li><a href="#configuracoes"><i class="fas fa-cog"></i> Configurações</a></li>
+        </ul>
+    </nav>
 
-
-
-            <p>Seu portal para melhores bazares online!</p>
-
-        </header>
- <div class=" card">
-                <div class="bazar">
-                    <img src="assets/depositphotos_646824688-stock-illustration-img-logo-img-letter-img.jpg"">
-                <H1>bazae1</H1>
-                <p>sobre bazar</p>
-                </div>
-                 <img src="assets/depositphotos_646824688-stock-illustration-img-logo-img-letter-img.jpg"">
-                <H1>bazae1</H1>
-                <p>sobre bazar</p>
-                <img src="assets/depositphotos_646824688-stock-illustration-img-logo-img-letter-img.jpg"">
-                <H1>bazae1</H1>
-                <p>sobre bazar</p>
-                </div>
-                
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar bazares...">
             </div>
-        <main>
-            
-            <section class="bazares">
-                <h2>Próximos Bazares</h2>
+            <div class="header-actions">
+                <button class="add-bazar-btn" onclick="window.location.href='adicionar-bazar.html'">
+                    <i class="fas fa-plus"></i>
+                    Adicionar Bazar
+                </button>
+                <button class="profile-btn" onclick="window.location.href='perfil.html'">
+                    <i class="fas fa-user-circle"></i>
+                    Perfil
+                </button>
+            </div>
+        </header>
 
-                <ul>
-                    <li><strong>Bazar da Moda Vintage</strong> - 28/06/2025 - Rua das Acácias, 123 - São Paulo/SP</li>
-                    <li><strong>Outlet Independente</strong> - 30/06/2025 - Av. Liberdade, 456 - Rio de Janeiro/RJ</li>
-                    <li><strong>Garimpo Fashion</strong> - 05/07/2025 - Online via Instagram @garimpofashion</li>
-                </ul>
-            </section>
-            <section class="contato">
-                <h2>Contato</h2>
-                <p>📧 Email: contato@fashionspace.com</p>
-                <p>📱 WhatsApp: (11) 91234-5678</p>
-                <p>📍 Endereço físico: Rua Criativa, 789 - Curitiba/PR</p>
-            </section>
-        </main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>FashionSpace</h1>
+                <p>Seu portal para os melhores bazares online!</p>
+            </div>
+        </section>
 
-           
+        <!-- Carousel Section -->
+        <section class="carousel-section">
+            <h2>Bazares em Destaque</h2>
+            <div class="carousel-container">
+                <div class="carousel" id="carousel">
+                    <div class="carousel-card active">
+                        <img src="assets/OIP.webp" alt="Bazar Vintage">
+                        <div class="card-content">
+                            <h3>Bazar da Moda Vintage</h3>
+                            <p>Peças únicas e exclusivas dos anos 80 e 90</p>
+                            <div class="card-info">
+                                <span><i class="fas fa-map-marker-alt"></i> São Paulo, SP</span>
+                                <span><i class="fas fa-calendar"></i> 28/06/2025</span>
+                            </div>
+                            <button class="card-btn">Ver Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <img src="assets/OIP.webp" alt="Outlet Fashion">
+                        <div class="card-content">
+                            <h3>Outlet Independente</h3>
+                            <p>Marcas nacionais com até 70% de desconto</p>
+                            <div class="card-info">
+                                <span><i class="fas fa-map-marker-alt"></i> Rio de Janeiro, RJ</span>
+                                <span><i class="fas fa-calendar"></i> 30/06/2025</span>
+                            </div>
+                            <button class="card-btn">Ver Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <img src="assets/OIP.webp" alt="Garimpo Online">
+                        <div class="card-content">
+                            <h3>Garimpo Fashion</h3>
+                            <p>Brechó online com peças selecionadas</p>
+                            <div class="card-info">
+                                <span><i class="fas fa-globe"></i> Online</span>
+                                <span><i class="fas fa-calendar"></i> 05/07/2025</span>
+                            </div>
+                            <button class="card-btn">Ver Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <img src="assets/OIP.webp" alt="Bazar Premium">
+                        <div class="card-content">
+                            <h3>Bazar Premium</h3>
+                            <p>Roupas de grife com preços acessíveis</p>
+                            <div class="card-info">
+                                <span><i class="fas fa-map-marker-alt"></i> Curitiba, PR</span>
+                                <span><i class="fas fa-calendar"></i> 10/07/2025</span>
+                            </div>
+                            <button class="card-btn">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Bazares Grid -->
+        <section class="bazares-grid">
+            <h2>Todos os Bazares</h2>
+            <div class="grid-container">
+                <div class="bazar-card">
+                    <img src="assets/OIP.webp" alt="Bazar 1">
+                    <button class="favorite-btn" data-bazar="Bazar Sustentável">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <div class="card-body">
+                        <h4>Bazar Sustentável</h4>
+                        <p>Moda consciente e sustentável</p>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> Brasília, DF</span>
+                    </div>
+                </div>
+                <div class="bazar-card">
+                    <img src="assets/OIP.webp" alt="Bazar 2">
+                    <button class="favorite-btn" data-bazar="Feira de Artesãos">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <div class="card-body">
+                        <h4>Feira de Artesãos</h4>
+                        <p>Peças artesanais únicas</p>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> Salvador, BA</span>
+                    </div>
+                </div>
+                <div class="bazar-card">
+                    <img src="assets/OIP.webp" alt="Bazar 3">
+                    <button class="favorite-btn" data-bazar="Moda Jovem">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <div class="card-body">
+                        <h4>Moda Jovem</h4>
+                        <p>Tendências para o público jovem</p>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> Fortaleza, CE</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="contact-content">
+                <h2>Entre em Contato</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contato@fashionspace.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(11) 91234-5678</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Rua Criativa, 789 - Curitiba/PR</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <footer>
             <p>&copy; 2025 Fashion Space. Todos os direitos reservados.</p>
         </footer>
     </div>
-</body>
 
+
+
+    <script src="main-script.js"></script>
+</body>
 </html>

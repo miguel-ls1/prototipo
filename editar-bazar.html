@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Bazar - FashionSpace</title>
+    <link rel="stylesheet" href="editar-bazar-style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="back-btn" onclick="window.location.href='perfil.html'">
+                <i class="fas fa-arrow-left"></i>
+                Voltar ao Perfil
+            </button>
+            <h1>Editar Bazar</h1>
+            <div class="status-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="statusToggle" checked>
+                    <span class="slider"></span>
+                </label>
+                <span id="statusLabel">Ativo</span>
+            </div>
+        </header>
+
+        <form class="bazar-form" id="editBazarForm">
+            <div class="image-upload-section">
+                <div class="image-preview has-image" id="imagePreview">
+                    <img src="https://via.placeholder.com/200x200/2196F3/white?text=Bazar" alt="Preview">
+                </div>
+                <input type="file" id="imageInput" accept="image/*" hidden>
+                <button type="button" class="upload-btn" onclick="document.getElementById('imageInput').click()">
+                    <i class="fas fa-camera"></i>
+                    Alterar Imagem
+                </button>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="nome">Nome do Bazar *</label>
+                    <input type="text" id="nome" name="nome" value="Bazar Vintage Maria" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cep">CEP *</label>
+                    <input type="text" id="cep" name="cep" value="01234-567" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="endereco">Endereço *</label>
+                    <input type="text" id="endereco" name="endereco" value="Rua das Flores" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="numero">Número</label>
+                    <input type="text" id="numero" name="numero" value="123">
+                </div>
+
+                <div class="form-group">
+                    <label for="bairro">Bairro *</label>
+                    <input type="text" id="bairro" name="bairro" value="Centro" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cidade">Cidade *</label>
+                    <input type="text" id="cidade" name="cidade" value="São Paulo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" value="(11) 99999-9999">
+                </div>
+
+                <div class="form-group">
+                    <label for="horario">Horário de Funcionamento</label>
+                    <input type="text" id="horario" name="horario" value="09:00 - 18:00">
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="descricao">Descrição do Bazar *</label>
+                <textarea id="descricao" name="descricao" rows="4" required>Roupas vintage dos anos 80 e 90, peças únicas e exclusivas com muito estilo e personalidade.</textarea>
+            </div>
+
+            <div class="stats-section">
+                <h3>Estatísticas do Bazar</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <i class="fas fa-eye"></i>
+                        <div>
+                            <span class="stat-number">1,234</span>
+                            <span class="stat-label">Visualizações</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-heart"></i>
+                        <div>
+                            <span class="stat-number">89</span>
+                            <span class="stat-label">Curtidas</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-calendar"></i>
+                        <div>
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Dias Online</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="delete-btn" onclick="deletarBazar()">
+                    <i class="fas fa-trash"></i>
+                    Excluir Bazar
+                </button>
+                <div class="action-buttons">
+                    <button type="button" class="cancel-btn" onclick="window.location.href='perfil.html'">Cancelar</button>
+                    <button type="submit" class="save-btn">
+                        <i class="fas fa-save"></i>
+                        Salvar Alterações
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="editar-bazar-script.js"></script>
+</body>
+</html>

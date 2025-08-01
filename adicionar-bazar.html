@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Novo Bazar</title>
+    <link rel="stylesheet" href="style3.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button href="index.html" class="back-btn" onclick="voltarPagina()">
+                <i   class="fas fa-arrow-left"></i>
+                Voltar
+            </button>
+            <h1>Adicionar Novo Bazar</h1>
+        </header>
+
+        <form class="bazar-form" id="bazarForm">
+            <div class="image-upload-section">
+                <div class="image-preview" id="imagePreview">
+                    <i class="fas fa-camera"></i>
+                    <span>Adicionar Imagem do Bazar</span>
+                </div>
+                <input type="file" id="imageInput" accept="image/*" hidden>
+                <button type="button" class="upload-btn" onclick="document.getElementById('imageInput').click()">
+                    <i class="fas fa-plus"></i>
+                    Escolher Imagem
+                </button>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="nome">Nome do Bazar *</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cep">CEP *</label>
+                    <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="endereco">Endereço *</label>
+                    <input type="text" id="endereco" name="endereco" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="numero">Número</label>
+                    <input type="text" id="numero" name="numero">
+                </div>
+
+                <div class="form-group">
+                    <label for="bairro">Bairro *</label>
+                    <input type="text" id="bairro" name="bairro" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cidade">Cidade *</label>
+                    <input type="text" id="cidade" name="cidade" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+                </div>
+
+                <div class="form-group">
+                    <label for="horario">Horário de Funcionamento</label>
+                    <input type="text" id="horario" name="horario" placeholder="Ex: 08:00 - 18:00">
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="descricao">Descrição do Bazar *</label>
+                <textarea id="descricao" name="descricao" rows="4" placeholder="Descreva o bazar, produtos vendidos, especialidades..." required></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" onclick="voltarPagina()">Cancelar</button>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-plus"></i>
+                    Adicionar Bazar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
