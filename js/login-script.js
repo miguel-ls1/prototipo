@@ -78,7 +78,7 @@ registerFormElement.addEventListener('submit', (e) => {
     localStorage.setItem('fashionspace_logged_in', 'true');
     
     // Redirecionar para página principal
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
 });
 
 // Login
@@ -117,13 +117,13 @@ loginFormElement.addEventListener('submit', (e) => {
     
     // Login bem-sucedido
     localStorage.setItem('fashionspace_logged_in', 'true');
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
 });
 
 // Verificar se já está logado ao carregar a página
 window.addEventListener('load', () => {
     const isLoggedIn = localStorage.getItem('fashionspace_logged_in');
     if (isLoggedIn === 'true') {
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     }
 });

@@ -125,9 +125,14 @@ document.getElementById('bazarForm').addEventListener('submit', function(e) {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
         
+        // Notificação de novo bazar
+        if (typeof addNotification === 'function') {
+            addNotification('new-bazar', 'Novo bazar criado!', `${formData.nome} foi adicionado em ${formData.cidade}`);
+        }
+        
         // Redirecionar para página principal após 2 segundos
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = '../index.html';
         }, 2000);
     }, 1500);
 });
@@ -158,7 +163,7 @@ function showMessage(text, type) {
 // Função para voltar à página principal
 function voltarPagina() {
     if (confirm('Tem certeza que deseja sair? Os dados não salvos serão perdidos.')) {
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     }
 }
 

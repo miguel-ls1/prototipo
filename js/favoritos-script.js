@@ -4,37 +4,77 @@ let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 // Bazar data (in a real app, this would come from a database)
 const bazarData = {
     'Bazar Sustentável': {
-        image: 'assets/OIP.webp',
+        image: '../assets/OIP.webp',
         description: 'Moda consciente e sustentável',
         location: 'Brasília, DF'
     },
     'Feira de Artesãos': {
-        image: 'assets/OIP.webp',
+        image: '../assets/OIP.webp',
         description: 'Peças artesanais únicas',
         location: 'Salvador, BA'
     },
     'Moda Jovem': {
-        image: 'assets/OIP.webp',
+        image: '../assets/OIP.webp',
         description: 'Tendências para o público jovem',
         location: 'Fortaleza, CE'
     },
+    'Vintage Store': {
+        image: '../assets/OIP.webp',
+        description: 'Peças vintage autênticas dos anos 70-90',
+        location: 'Porto Alegre, RS'
+    },
+    'Outlet Fashion': {
+        image: '../assets/OIP.webp',
+        description: 'Marcas famosas com até 80% de desconto',
+        location: 'Belo Horizonte, MG'
+    },
+    'Brechó Chique': {
+        image: '../assets/OIP.webp',
+        description: 'Roupas de grife seminovas',
+        location: 'Recife, PE'
+    },
+    'Moda Plus Size': {
+        image: '../assets/OIP.webp',
+        description: 'Moda inclusiva e estilosa',
+        location: 'Goiânia, GO'
+    },
+    'Street Fashion': {
+        image: '../assets/OIP.webp',
+        description: 'Estilo urbano e streetwear',
+        location: 'Florianópolis, SC'
+    },
+    'Moda Infantil': {
+        image: '../assets/OIP.webp',
+        description: 'Roupas fofas para crianças',
+        location: 'Manaus, AM'
+    },
+    'Moda Executiva': {
+        image: '../assets/OIP.webp',
+        description: 'Roupas sociais e profissionais',
+        location: 'Vitória, ES'
+    },
+    'Boho Style': {
+        image: '../assets/OIP.webp',
+        description: 'Estilo boêmio e hippie chic',
+        location: 'João Pessoa, PB'
+    },
     'Bazar da Moda Vintage': {
-        image: 'assets/OIP.webp',
+        image: '../assets/OIP.webp',
         description: 'Peças únicas e exclusivas dos anos 80 e 90',
         location: 'São Paulo, SP'
     },
     'Outlet Independente': {
-        image: 'assets/OIP.webp',
+        image: '../assets/OIP.webp',
         description: 'Marcas nacionais com até 70% de desconto',
         location: 'Rio de Janeiro, RJ'
     },
     'Garimpo Fashion': {
-        image: 'assets/OIP.webp',
+        image: '../assets/OIP.webp',
         description: 'Brechó online com peças selecionadas',
         location: 'Online'
     },
     'Bazar Premium': {
-        image: 'assets/OIP.webp',
+        image: '../assets/OIP.webp',
         description: 'Roupas de grife com preços acessíveis',
         location: 'Curitiba, PR'
     }

@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Perfil - FashionSpace</title>
-    <link rel="stylesheet" href="perfil-style.css">
+    <link rel="stylesheet" href="../css/perfil-style.css">
+    <link rel="stylesheet" href="../css/dark-mode-detalhes.css">
+    <link rel="stylesheet" href="../css/analytics.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src="assets/Image.png" alt="Logo" class="sidebar-logo">
+            <img src="../assets/Image.png" alt="Logo" class="sidebar-logo">
             <h3>FashionSpace</h3>
         </div>
         <ul class="sidebar-menu">
-            <li><a href="index.html"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="../index.html"><i class="fas fa-home"></i> Início</a></li>
             <li><a href="#bazares"><i class="fas fa-store"></i> Bazares</a></li>
             <li><a href="favoritos.html"><i class="fas fa-heart"></i> Favoritos</a></li>
             <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
@@ -44,7 +46,7 @@
         <div class="container">
             <!-- Header -->
             <header class="profile-header">
-            <button class="back-btn" onclick="window.location.href='index.html'" style="background: #5f81a5; color: white; border: none;">
+            <button class="back-btn" onclick="window.location.href='../index.html'" style="background: #5f81a5; color: white; border: none;">
                 <i class="fas fa-arrow-left"></i>
                 Voltar
             </button>
@@ -66,7 +68,7 @@
             <!-- Profile Card -->
             <div class="profile-card">
                 <div class="profile-avatar">
-                    <img src="assets/OIP.webp" alt="Avatar" id="avatarImg">
+                    <img src="../assets/OIP.webp" alt="Avatar" id="avatarImg">
                     <button class="avatar-edit" id="avatarEdit">
                         <i class="fas fa-camera"></i>
                     </button>
@@ -131,6 +133,13 @@
                 </div>
 
                 <div class="details-section">
+                    <h3>Análise e Relatórios por Bazar</h3>
+                    <div class="bazar-analytics" id="bazarAnalytics">
+                        <!-- Análises serão carregadas dinamicamente -->
+                    </div>
+                </div>
+                
+                <div class="details-section">
                     <h3>Meus Bazares</h3>
                     <div class="bazares-list" id="userBazaresList">
                         <!-- Bazares serão carregados dinamicamente -->
@@ -172,7 +181,9 @@
     </div>
     </div>
 
-    <script src="perfil-script.js"></script>
+    <script src="../js/perfil-script.js"></script>
+    <script src="../js/dark-mode-global.js"></script>
+    <script src="../js/analytics.js"></script>
     <script>
         function toggleDarkMode() {
             const isDark = localStorage.getItem('darkMode') === 'true';
@@ -238,6 +249,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             applyDarkMode();
             loadUserBazares();
+            loadBazarAnalytics();
             
             document.getElementById('menuToggle').addEventListener('click', function() {
                 document.getElementById('sidebar').classList.toggle('active');

@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FashionSpace - Bazares Online</title>
-    <link rel="stylesheet" href="style-main.css">
+    <link rel="stylesheet" href="css/style-main.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/rating-system.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -18,8 +21,8 @@
         <ul class="sidebar-menu">
             <li><a href="#home"><i class="fas fa-home"></i> Início</a></li>
             <li><a href="#bazares"><i class="fas fa-store"></i> Bazares</a></li>
-            <li><a href="favoritos.html"><i class="fas fa-heart"></i> Favoritos</a></li>
-            <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+            <li><a href="pages/favoritos.html"><i class="fas fa-heart"></i> Favoritos</a></li>
+            <li><a href="pages/perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
             <li><a href="#" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> <span id="darkModeText">Modo Escuro</span></a></li>
         </ul>
     </nav>
@@ -34,18 +37,63 @@
             <div class="search-bar">
                 <i class="fas fa-search"></i>
                 <input type="text" id="searchInput" placeholder="Buscar bazares..." onkeyup="searchBazares()">
+                <button class="filter-toggle" onclick="toggleFilters()">
+                    <i class="fas fa-filter"></i>
+                </button>
+                
+                <!-- Dropdown de Filtros -->
+                <div class="filter-dropdown" id="filterDropdown">
+                    <div class="filter-dropdown-content">
+                        <div class="filter-item">
+                            <label>Cidade:</label>
+                            <select id="cityFilter" onchange="applyFilters()">
+                                <option value="">Todas as cidades</option>
+                                <option value="São Paulo">São Paulo</option>
+                                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                <option value="Brasília">Brasília</option>
+                                <option value="Salvador">Salvador</option>
+                                <option value="Fortaleza">Fortaleza</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-item">
+                            <label>Categoria:</label>
+                            <select id="categoryFilterSelect" onchange="applyFilters()">
+                                <option value="">Todas categorias</option>
+                                <option value="luxo">Luxo</option>
+                                <option value="vintage">Vintage</option>
+                                <option value="outlet">Outlet</option>
+                                <option value="artesanal">Artesanal</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-actions">
+                            <button class="clear-filters" onclick="clearFilters()">Limpar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="header-actions">
-                <button class="add-bazar-btn" onclick="window.location.href='adicionar-bazar.html'">
+                <button class="chat-btn" onclick="toggleChat()">
+                    <i class="fas fa-comments"></i>
+                    <span class="chat-count" id="chatCount">2</span>
+                </button>
+                <button class="notification-btn" onclick="showNotificationCenter()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count" id="notificationCount">3</span>
+                </button>
+                <button class="add-bazar-btn" onclick="window.location.href='pages/adicionar-bazar.html'">
                     <i class="fas fa-plus"></i>
                     Adicionar Bazar
                 </button>
-                <button class="profile-btn" onclick="window.location.href='perfil.html'">
+                <button class="profile-btn" onclick="window.location.href='pages/perfil.html'">
                     <i class="fas fa-user-circle"></i>
                     Perfil
                 </button>
             </div>
         </header>
+
+
 
         <!-- Hero Section -->
         <section class="hero">
@@ -54,7 +102,56 @@
                 <p>Conectamos você aos melhores bazares e experiências de moda únicas. Descubra peças exclusivas e tendências autênticas.</p>
                 <div class="hero-buttons">
                     <button class="btn-primary" onclick="document.querySelector('.bazares-grid').scrollIntoView({behavior: 'smooth'})">EXPLORAR AGORA</button>
-                    <button class="btn-secondary" onclick="window.location.href='adicionar-bazar.html'">CRIAR BAZAR</button>
+                    <button class="btn-secondary" onclick="window.location.href='pages/adicionar-bazar.html'">CRIAR BAZAR</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeria Expandida -->
+        <section class="gallery-section">
+            <div class="gallery-header">
+                <h2>Galeria de Fotos</h2>
+                <button class="upload-btn" onclick="openUploadModal()">
+                    <i class="fas fa-plus"></i> Adicionar Fotos
+                </button>
+            </div>
+            
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" onclick="openImageModal('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800')">
+                    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&h=300&fit=crop" alt="Galeria">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openImageModal('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800')">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=300&fit=crop" alt="Galeria">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openImageModal('https://images.unsplash.com/photo-1445205170230-053b83016050?w=800')">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop" alt="Galeria">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openImageModal('https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800')">
+                    <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&h=300&fit=crop" alt="Galeria">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openImageModal('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800')">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=300&fit=crop" alt="Galeria">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openImageModal('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800')">
+                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=300&fit=crop" alt="Galeria">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
                 </div>
             </div>
         </section>
@@ -73,7 +170,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> São Paulo, SP</span>
                                 <span><i class="fas fa-calendar"></i> 28/06/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Bazar da Moda Vintage', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Bazar da Moda Vintage'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -85,7 +182,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Rio de Janeiro, RJ</span>
                                 <span><i class="fas fa-calendar"></i> 30/06/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Outlet Independente', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Outlet Independente'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -97,7 +194,7 @@
                                 <span><i class="fas fa-globe"></i> Online</span>
                                 <span><i class="fas fa-calendar"></i> 05/07/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Garimpo Fashion', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Garimpo Fashion'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -109,7 +206,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Curitiba, PR</span>
                                 <span><i class="fas fa-calendar"></i> 10/07/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Bazar Premium', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Bazar Premium'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -121,7 +218,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Belo Horizonte, MG</span>
                                 <span><i class="fas fa-calendar"></i> 15/07/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Fashion Market', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Fashion Market'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -133,7 +230,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Salvador, BA</span>
                                 <span><i class="fas fa-calendar"></i> 20/07/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Vintage Paradise', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Vintage Paradise'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -145,7 +242,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Recife, PE</span>
                                 <span><i class="fas fa-calendar"></i> 25/07/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Street Style Expo', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Street Style Expo'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -157,7 +254,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Fortaleza, CE</span>
                                 <span><i class="fas fa-calendar"></i> 30/07/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Plus Size Fashion', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Plus Size Fashion'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -169,7 +266,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Brasília, DF</span>
                                 <span><i class="fas fa-calendar"></i> 05/08/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Fitness Fashion', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Fitness Fashion'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -181,7 +278,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
                                 <span><i class="fas fa-calendar"></i> 10/08/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Designer Outlet', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Designer Outlet'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -193,7 +290,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Florianópolis, SC</span>
                                 <span><i class="fas fa-calendar"></i> 15/08/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Boho Market', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Boho Market'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -205,7 +302,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Vitória, ES</span>
                                 <span><i class="fas fa-calendar"></i> 20/08/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Kids Fashion', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Kids Fashion'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -217,7 +314,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Goiânia, GO</span>
                                 <span><i class="fas fa-calendar"></i> 25/08/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Executive Style', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Executive Style'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -229,7 +326,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> João Pessoa, PB</span>
                                 <span><i class="fas fa-calendar"></i> 30/08/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Beach Fashion', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Beach Fashion'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -241,7 +338,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Campinas, SP</span>
                                 <span><i class="fas fa-calendar"></i> 05/09/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Luxury Bazaar', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Luxury Bazaar'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -253,7 +350,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Ribeirão Preto, SP</span>
                                 <span><i class="fas fa-calendar"></i> 10/09/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Trendy Market', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Trendy Market'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -265,7 +362,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Ouro Preto, MG</span>
                                 <span><i class="fas fa-calendar"></i> 15/09/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Artisan Fair', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Artisan Fair'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -277,7 +374,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Londrina, PR</span>
                                 <span><i class="fas fa-calendar"></i> 20/09/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Youth Style', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Youth Style'">Ver Detalhes</button>
                         </div>
                     </div>
                     <div class="carousel-card">
@@ -289,7 +386,7 @@
                                 <span><i class="fas fa-map-marker-alt"></i> Santos, SP</span>
                                 <span><i class="fas fa-calendar"></i> 25/09/2025</span>
                             </div>
-                            <button class="card-btn" onclick="window.open('bazar-detalhes.html?name=Mega Sale', '_blank')">Ver Detalhes</button>
+                            <button class="card-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Mega Sale'">Ver Detalhes</button>
                         </div>
                     </div>
                 </div>
@@ -356,9 +453,13 @@
                     </button>
                     <div class="card-body">
                         <h4>Bazar Sustentável</h4>
+                        <div class="rating" data-bazar="Bazar Sustentável">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-text">4.2 (18 avaliações)</span>
+                        </div>
                         <p>Moda consciente e sustentável</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Brasília, DF</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Bazar Sustentável', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Bazar Sustentável'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -370,9 +471,13 @@
                     </button>
                     <div class="card-body">
                         <h4>Feira de Artesãos</h4>
+                        <div class="rating" data-bazar="Feira de Artesãos">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-text">4.8 (25 avaliações)</span>
+                        </div>
                         <p>Peças artesanais únicas</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Salvador, BA</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Feira de Artesãos', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Feira de Artesãos'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -384,9 +489,13 @@
                     </button>
                     <div class="card-body">
                         <h4>Moda Jovem</h4>
+                        <div class="rating" data-bazar="Moda Jovem">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-text">4.1 (12 avaliações)</span>
+                        </div>
                         <p>Tendências para o público jovem</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Fortaleza, CE</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Moda Jovem', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Moda Jovem'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -398,9 +507,13 @@
                     </button>
                     <div class="card-body">
                         <h4>Vintage Store</h4>
+                        <div class="rating" data-bazar="Vintage Store">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-text">4.9 (32 avaliações)</span>
+                        </div>
                         <p>Peças vintage autênticas dos anos 70-90</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Vintage Store', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Vintage Store'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -412,9 +525,13 @@
                     </button>
                     <div class="card-body">
                         <h4>Outlet Fashion</h4>
+                        <div class="rating" data-bazar="Outlet Fashion">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-text">4.3 (28 avaliações)</span>
+                        </div>
                         <p>Marcas famosas com até 80% de desconto</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Belo Horizonte, MG</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Outlet Fashion', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Outlet Fashion'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -428,7 +545,7 @@
                         <h4>Brechó Chique</h4>
                         <p>Roupas de grife seminovas</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Recife, PE</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Brechó Chique', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Brechó Chique'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -442,7 +559,7 @@
                         <h4>Moda Plus Size</h4>
                         <p>Moda inclusiva e estilosa</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Goiânia, GO</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Moda Plus Size', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Moda Plus Size'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -456,7 +573,7 @@
                         <h4>Street Fashion</h4>
                         <p>Estilo urbano e streetwear</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Florianópolis, SC</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Street Fashion', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Street Fashion'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -470,7 +587,7 @@
                         <h4>Moda Infantil</h4>
                         <p>Roupas fofas para crianças</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Manaus, AM</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Moda Infantil', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Moda Infantil'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -484,7 +601,7 @@
                         <h4>Moda Executiva</h4>
                         <p>Roupas sociais e profissionais</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Vitória, ES</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Moda Executiva', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Moda Executiva'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -498,7 +615,7 @@
                         <h4>Boho Style</h4>
                         <p>Estilo boêmio e hippie chic</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> João Pessoa, PB</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Boho Style', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Boho Style'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -513,7 +630,7 @@
                         <h4>Moda Sustentável</h4>
                         <p>Roupas ecológicas e sustentáveis</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Cuiabá, MT</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Moda Sustentável', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Moda Sustentável'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -527,7 +644,7 @@
                         <h4>Retrô Chic</h4>
                         <p>Moda retrô dos anos 60 e 70</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Campo Grande, MS</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Retrô Chic', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Retrô Chic'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -541,7 +658,7 @@
                         <h4>Alta Costura</h4>
                         <p>Peças exclusivas de alta costura</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Maceió, AL</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Alta Costura', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Alta Costura'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -555,7 +672,7 @@
                         <h4>Casual Wear</h4>
                         <p>Roupas casuais para o dia a dia</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Aracaju, SE</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Casual Wear', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Casual Wear'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -569,7 +686,7 @@
                         <h4>Festa Glamour</h4>
                         <p>Vestidos e roupas para festas</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Teresina, PI</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Festa Glamour', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Festa Glamour'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -583,7 +700,7 @@
                         <h4>Urban Fashion</h4>
                         <p>Moda urbana e contemporânea</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> São Luís, MA</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Urban Fashion', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Urban Fashion'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -597,7 +714,7 @@
                         <h4>Night Fashion</h4>
                         <p>Roupas para baladas e eventos noturnos</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Belém, PA</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Night Fashion', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Night Fashion'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -611,7 +728,7 @@
                         <h4>Discount Store</h4>
                         <p>Roupas de marca com preços incríveis</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Palmas, TO</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Discount Store', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Discount Store'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -625,7 +742,7 @@
                         <h4>Premium Collection</h4>
                         <p>Coleção premium de roupas exclusivas</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Rio Branco, AC</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Premium Collection', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Premium Collection'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -639,7 +756,7 @@
                         <h4>Handmade Market</h4>
                         <p>Roupas artesanais feitas à mão</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Boa Vista, RR</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Handmade Market', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Handmade Market'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -653,7 +770,7 @@
                         <h4>Teen Store</h4>
                         <p>Loja especializada em moda teen</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> Macapá, AP</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Teen Store', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Teen Store'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -680,9 +797,13 @@
                         </button>
                         <div class="card-body">
                             <h4>Mega Outlet</h4>
+                            <div class="rating" data-bazar="Mega Outlet">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-text">4.7 (89 avaliações)</span>
+                            </div>
                             <p>Maior outlet de roupas da região</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Campinas, SP</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Mega Outlet', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Mega Outlet'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -694,9 +815,13 @@
                         </button>
                         <div class="card-body">
                             <h4>Fashion Week</h4>
+                            <div class="rating" data-bazar="Fashion Week">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-text">4.9 (156 avaliações)</span>
+                            </div>
                             <p>Tendências direto das passarelas</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> São Paulo, SP</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Fashion Week', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Fashion Week'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -708,9 +833,13 @@
                         </button>
                         <div class="card-body">
                             <h4>Luxo Acessível</h4>
+                            <div class="rating" data-bazar="Luxo Acessível">
+                                <span class="stars">★★★★☆</span>
+                                <span class="rating-text">4.4 (73 avaliações)</span>
+                            </div>
                             <p>Marcas de luxo com preços justos</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Rio de Janeiro, RJ</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Luxo Acessível', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Luxo Acessível'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -724,7 +853,7 @@
                             <h4>Estilo Único</h4>
                             <p>Peças exclusivas e personalizadas</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Curitiba, PR</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Estilo Único', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Estilo Único'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -738,7 +867,7 @@
                             <h4>Moda Fitness</h4>
                             <p>Roupas esportivas e academia</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Brasília, DF</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Moda Fitness', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Moda Fitness'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -752,7 +881,7 @@
                             <h4>Casual Chic</h4>
                             <p>Elegância para o dia a dia</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Salvador, BA</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Casual Chic', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Casual Chic'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -779,9 +908,13 @@
                         </button>
                         <div class="card-body">
                             <h4>Eco Fashion</h4>
+                            <div class="rating" data-bazar="Eco Fashion">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-text">4.8 (42 avaliações)</span>
+                            </div>
                             <p>Moda sustentável e ecológica</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Florianópolis, SC</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Eco Fashion', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Eco Fashion'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -793,9 +926,13 @@
                         </button>
                         <div class="card-body">
                             <h4>Retro Style</h4>
+                            <div class="rating" data-bazar="Retro Style">
+                                <span class="stars">★★★★☆</span>
+                                <span class="rating-text">4.3 (27 avaliações)</span>
+                            </div>
                             <p>Moda retrô dos anos 50 e 60</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Retro Style', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Retro Style'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -807,9 +944,13 @@
                         </button>
                         <div class="card-body">
                             <h4>Teen Fashion</h4>
+                            <div class="rating" data-bazar="Teen Fashion">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-text">4.6 (35 avaliações)</span>
+                            </div>
                             <p>Moda jovem e descolada</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Fortaleza, CE</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Teen Fashion', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Teen Fashion'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -823,7 +964,7 @@
                             <h4>Glamour Night</h4>
                             <p>Roupas para festas e eventos</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Recife, PE</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Glamour Night', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Glamour Night'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -837,7 +978,7 @@
                             <h4>Comfort Zone</h4>
                             <p>Roupas confortáveis para casa</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Belo Horizonte, MG</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Comfort Zone', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Comfort Zone'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -851,7 +992,7 @@
                             <h4>Urban Style</h4>
                             <p>Estilo urbano e moderno</p>
                             <span class="location"><i class="fas fa-map-marker-alt"></i> Goiânia, GO</span>
-                            <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=Urban Style', '_blank')">
+                            <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?name=Urban Style'">
                                 <i class="fas fa-eye"></i> Ver Detalhes
                             </button>
                         </div>
@@ -893,7 +1034,7 @@
         // Verificar se está logado
         const isLoggedIn = localStorage.getItem('fashionspace_logged_in');
         if (isLoggedIn !== 'true') {
-            window.location.href = 'login.html';
+            window.location.href = 'pages/login.html';
         }
         
         // Carregar bazares do usuário
@@ -914,7 +1055,7 @@
                         <h4>${bazar.nome}</h4>
                         <p>${bazar.descricao}</p>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> ${bazar.cidade}</span>
-                        <button class="details-btn" onclick="window.open('bazar-detalhes.html?name=${bazar.nome}', '_blank')">
+                        <button class="details-btn" onclick="window.location.href='pages/bazar-detalhes.html?id=${bazar.id}'">
                             <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
@@ -946,20 +1087,81 @@
         
         // Função de busca
         function searchBazares() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            applyFilters();
+        }
+        
+        // Alternar filtros
+        function toggleFilters() {
+            console.log('toggleFilters chamado');
+            const dropdown = document.getElementById('filterDropdown');
+            console.log('Dropdown encontrado:', dropdown);
+            if (dropdown) {
+                dropdown.classList.toggle('active');
+                console.log('Dropdown ativo:', dropdown.classList.contains('active'));
+            } else {
+                console.log('Dropdown não encontrado!');
+            }
+        }
+        
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('filterDropdown');
+            const toggle = document.querySelector('.filter-toggle');
+            
+            if (dropdown && toggle && !dropdown.contains(e.target) && !toggle.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+        
+
+        
+        // Aplicar filtros
+        function applyFilters() {
+            const searchInput = document.getElementById('searchInput');
+            const cityFilter = document.getElementById('cityFilter');
+            const categoryFilter = document.getElementById('categoryFilterSelect');
+            
+            if (!searchInput) return;
+            
+            const searchTerm = searchInput.value.toLowerCase();
+            const cityValue = cityFilter ? cityFilter.value : '';
+            const categoryValue = categoryFilter ? categoryFilter.value : '';
             const bazarCards = document.querySelectorAll('.bazar-card');
             
             bazarCards.forEach(card => {
-                const title = card.querySelector('h4').textContent.toLowerCase();
-                const description = card.querySelector('p').textContent.toLowerCase();
-                const location = card.querySelector('.location').textContent.toLowerCase();
+                const title = card.querySelector('h4')?.textContent.toLowerCase() || '';
+                const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+                const location = card.querySelector('.location')?.textContent.toLowerCase() || '';
+                const category = card.getAttribute('data-category') || '';
                 
-                if (title.includes(searchTerm) || description.includes(searchTerm) || location.includes(searchTerm)) {
+                const matchesSearch = !searchTerm || title.includes(searchTerm) || description.includes(searchTerm) || location.includes(searchTerm);
+                const matchesCity = !cityValue || location.includes(cityValue.toLowerCase());
+                const matchesCategory = !categoryValue || category === categoryValue;
+                
+                if (matchesSearch && matchesCity && matchesCategory) {
                     card.style.display = 'block';
                 } else {
                     card.style.display = 'none';
                 }
             });
+        }
+        
+        // Limpar filtros
+        function clearFilters() {
+            const searchInput = document.getElementById('searchInput');
+            const cityFilter = document.getElementById('cityFilter');
+            const categoryFilter = document.getElementById('categoryFilterSelect');
+            const dropdown = document.getElementById('filterDropdown');
+            
+            if (searchInput) searchInput.value = '';
+            if (cityFilter) cityFilter.value = '';
+            if (categoryFilter) categoryFilter.value = '';
+            
+            applyFilters();
+            
+            if (dropdown) {
+                dropdown.classList.remove('active');
+            }
         }
         
         // Carrossel de bazares
@@ -1109,6 +1311,12 @@
                 icon.className = 'fas fa-heart';
                 button.classList.add('favorited');
                 showNotification(`${bazarName} adicionado aos favoritos!`);
+                // Simular notificação de favorito
+                if (typeof addNotification === 'function') {
+                    setTimeout(() => {
+                        addNotification('favorite', 'Bazar favoritado!', `${bazarName} foi adicionado aos seus favoritos`);
+                    }, 2000);
+                }
             }
             
             localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -1126,7 +1334,16 @@
                     button.classList.add('favorited');
                 }
                 
-                button.addEventListener('click', () => {
+                // Remove listeners antigos
+                button.replaceWith(button.cloneNode(true));
+            });
+            
+            // Reconfigurar eventos após clonagem
+            document.querySelectorAll('.favorite-btn').forEach(button => {
+                const bazarName = button.getAttribute('data-bazar');
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     toggleFavorite(button, bazarName);
                 });
             });
@@ -1189,8 +1406,33 @@
             updateCarouselNovos();
             loadFavorites();
             initScrollAnimations();
+            
+            // Configurar cliques nos cards para ir aos detalhes
+            document.querySelectorAll('.bazar-card').forEach(card => {
+                const bazarName = card.querySelector('h4').textContent;
+                card.addEventListener('click', (e) => {
+                    if (!e.target.closest('.favorite-btn')) {
+                        window.open(`pages/bazar-detalhes.html?name=${encodeURIComponent(bazarName)}`, '_blank');
+                    }
+                });
+                card.style.cursor = 'pointer';
+            });
+            
+            // Configurar cliques nos cards do carrossel
+            document.querySelectorAll('.carousel-card').forEach(card => {
+                const bazarName = card.querySelector('h3').textContent;
+                card.addEventListener('click', (e) => {
+                    if (!e.target.closest('.card-btn')) {
+                        window.open(`pages/bazar-detalhes.html?name=${encodeURIComponent(bazarName)}`, '_blank');
+                    }
+                });
+                card.style.cursor = 'pointer';
+            });
         });
     </script>
-    <script src="main-script.js"></script>
+    <script src="js/main-script.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/simple-notifications.js"></script>
+    <script src="js/chat.js"></script>
 </body>
 </html>

@@ -199,7 +199,7 @@ function loadSavedBazares() {
         // Adicionar click para abrir detalhes
         bazarCard.addEventListener('click', (e) => {
             if (!e.target.closest('.favorite-btn')) {
-                window.open(`bazar-detalhes.html?id=${bazar.id}`, '_blank');
+                window.location.href = `pages/bazar-detalhes.html?id=${bazar.id}`;
             }
         });
         bazarCard.style.cursor = 'pointer';
@@ -219,6 +219,8 @@ function loadSavedBazares() {
 
 // Configurar botões de favoritos
 function setupFavoriteButtons() {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    
     document.querySelectorAll('.favorite-btn').forEach(btn => {
         const bazarName = btn.getAttribute('data-bazar');
         
@@ -226,35 +228,37 @@ function setupFavoriteButtons() {
         if (favorites.includes(bazarName)) {
             btn.classList.add('favorited');
             btn.querySelector('i').className = 'fas fa-heart';
+        } else {
+            btn.classList.remove('favorited');
+            btn.querySelector('i').className = 'far fa-heart';
         }
         
-        // Remover listeners antigos e adicionar novos
-        btn.replaceWith(btn.cloneNode(true));
-    });
-    
-    // Reconfigurar eventos
-    document.querySelectorAll('.favorite-btn').forEach(btn => {
-        const bazarName = btn.getAttribute('data-bazar');
+        // Remover listeners antigos
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
         
-        btn.addEventListener('click', (e) => {
+        // Adicionar novo listener
+        newBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             
-            const isFavorited = btn.classList.contains('favorited');
-            const icon = btn.querySelector('i');
+            const currentFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = currentFavorites.includes(bazarName);
+            const icon = newBtn.querySelector('i');
             
             if (isFavorited) {
-                btn.classList.remove('favorited');
+                newBtn.classList.remove('favorited');
                 icon.className = 'far fa-heart';
-                favorites = favorites.filter(fav => fav !== bazarName);
+                const updatedFavorites = currentFavorites.filter(fav => fav !== bazarName);
+                localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+                showFavoriteMessage('removido dos', bazarName);
             } else {
-                btn.classList.add('favorited');
+                newBtn.classList.add('favorited');
                 icon.className = 'fas fa-heart';
-                favorites.push(bazarName);
+                currentFavorites.push(bazarName);
+                localStorage.setItem('favorites', JSON.stringify(currentFavorites));
+                showFavoriteMessage('adicionado aos', bazarName);
             }
-            
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-            showFavoriteMessage(isFavorited ? 'removido dos' : 'adicionado aos', bazarName);
         });
     });
 }
@@ -278,7 +282,7 @@ function setupDefaultBazarClicks() {
         const bazarName = card.querySelector('h4').textContent;
         card.addEventListener('click', (e) => {
             if (!e.target.closest('.favorite-btn')) {
-                window.open(`bazar-detalhes.html?name=${encodeURIComponent(bazarName)}`, '_blank');
+                window.open(`pages/bazar-detalhes.html?name=${encodeURIComponent(bazarName)}`, '_blank');
             }
         });
         card.style.cursor = 'pointer';
@@ -289,6 +293,9 @@ function setupDefaultBazarClicks() {
 document.addEventListener('DOMContentLoaded', () => {
     loadUserName();
     loadSavedBazares();
+    setupFavoriteButtons();
+    setupDefaultBazarClicks();
+    setupHoverEffects();
 });
 
 // Detectar mudanças no localStorage para recarregar bazares

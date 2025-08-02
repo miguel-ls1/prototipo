@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes do Bazar - FashionSpace</title>
-    <link rel="stylesheet" href="bazar-detalhes-style.css">
+    <link rel="stylesheet" href="../css/bazar-detalhes-style.css">
+    <link rel="stylesheet" href="../css/reviews.css">
+    <link rel="stylesheet" href="../css/dark-mode-detalhes.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src="assets/Image.png" alt="Logo" class="sidebar-logo">
+            <img src="../assets/Image.png" alt="Logo" class="sidebar-logo">
             <h3>FashionSpace</h3>
         </div>
         <ul class="sidebar-menu">
-            <li><a href="index.html"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="../index.html"><i class="fas fa-home"></i> Início</a></li>
             <li><a href="#bazares"><i class="fas fa-store"></i> Bazares</a></li>
             <li><a href="favoritos.html"><i class="fas fa-heart"></i> Favoritos</a></li>
             <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
@@ -57,13 +59,13 @@
                 <div class="carousel-container">
                     <div class="image-carousel" id="imageCarousel">
                         <div class="carousel-slide active">
-                            <img src="assets/OIP.webp" alt="Bazar">
+                            <img src="../assets/OIP.webp" alt="Bazar">
                         </div>
                         <div class="carousel-slide">
-                            <img src="assets/Image.png" alt="Bazar">
+                            <img src="../assets/Image.png" alt="Bazar">
                         </div>
                         <div class="carousel-slide">
-                            <img src="assets/depositphotos_646824688-stock-illustration-img-logo-img-letter-img.jpg" alt="Bazar">
+                            <img src="../assets/depositphotos_646824688-stock-illustration-img-logo-img-letter-img.jpg" alt="Bazar">
                         </div>
                     </div>
                     <button class="carousel-btn prev" id="prevBtn">
@@ -117,10 +119,53 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Avaliações -->
+        <div class="reviews-section">
+            <div class="reviews-header">
+                <h2>Avaliações</h2>
+                <button class="add-review-btn" onclick="openReviewModal()">
+                    <i class="fas fa-plus"></i> Avaliar
+                </button>
+            </div>
+            
+            <div class="rating-summary">
+                <div class="rating-number" id="avgRating">4.5</div>
+                <div class="rating-info">
+                    <div class="stars" id="avgStars">★★★★★</div>
+                    <div class="rating-count" id="reviewCount">15 avaliações</div>
+                </div>
+            </div>
+            
+            <div class="reviews-list" id="reviewsList">
+                <!-- Reviews aparecerão aqui -->
+            </div>
+        </div>
     </div>
-    </div>
+    
+    <!-- Modal de Avaliação -->
+    <div class="review-modal" id="reviewModal">
+        <div class="modal-content">
+            <h3>Avaliar Bazar</h3>
+            <div class="star-rating" id="starRating">
+                <span class="star" data-rating="1">★</span>
+                <span class="star" data-rating="2">★</span>
+                <span class="star" data-rating="3">★</span>
+                <span class="star" data-rating="4">★</span>
+                <span class="star" data-rating="5">★</span>
+            </div>
+            <textarea id="reviewText" placeholder="Escreva sua avaliação..."></textarea>
+            <div class="modal-actions">
+                <button onclick="closeReviewModal()">Cancelar</button>
+                <button onclick="submitReview()">Enviar</button>
+            </div>
+        </div>
 
-    <script src="bazar-detalhes-script.js"></script>
+
+    <script src="../js/bazar-detalhes-script.js"></script>
+    <script src="../js/reviews.js"></script>
+    <script src="../js/dark-mode-global.js"></script>
+    <script src="../js/analytics.js"></script>
     <script>
         function toggleDarkMode() {
             const isDark = localStorage.getItem('darkMode') === 'true';
@@ -133,6 +178,25 @@
             document.body.classList.toggle('dark-mode', isDark);
             updateDarkModeText();
         }
+        
+        function updateDarkModeText() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            const darkModeText = document.getElementById('darkModeText');
+            if (darkModeText) {
+                darkModeText.textContent = isDark ? 'Modo Claro' : 'Modo Escuro';
+            }
+        }
+        
+        // Aplicar dark mode ao carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            applyDarkMode();
+            
+            // Menu toggle para sidebar
+            document.getElementById('menuToggle').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('active');
+                document.querySelector('.main-content').classList.toggle('shifted');
+            });
+        });
         
         // Dados fictícios dos bazares
         const bazaresFicticios = {
@@ -427,10 +491,20 @@
         function loadBazarDetails() {
             const urlParams = new URLSearchParams(window.location.search);
             const bazarName = urlParams.get('name');
+            const bazarId = urlParams.get('id');
             
-            if (bazarName) {
+            let bazar = null;
+            
+            if (bazarId) {
+                // Bazar criado pelo usuário (usando ID)
                 const userBazares = JSON.parse(localStorage.getItem('userBazares') || '[]');
-                let bazar = userBazares.find(b => b.nome === bazarName);
+                const fashionspaceBazares = JSON.parse(localStorage.getItem('fashionspace_bazares') || '[]');
+                
+                bazar = userBazares.find(b => b.id == bazarId) || fashionspaceBazares.find(b => b.id == bazarId);
+            } else if (bazarName) {
+                // Bazar padrão do sistema (usando nome)
+                const userBazares = JSON.parse(localStorage.getItem('userBazares') || '[]');
+                bazar = userBazares.find(b => b.nome === bazarName);
                 
                 // Se não encontrar nos bazares do usuário, usar dados fictícios
                 if (!bazar && bazaresFicticios[bazarName]) {
@@ -439,6 +513,7 @@
                         ...bazaresFicticios[bazarName]
                     };
                 }
+            }
                 
                 if (bazar) {
                     document.getElementById('bazarTitle').textContent = bazar.nome;
@@ -493,11 +568,11 @@
                             dot.onclick = () => currentSlide(index + 1);
                             dotsContainer.appendChild(dot);
                         });
-                    } else if (bazar.image) {
+                    } else if (bazar.image || bazar.imagem) {
                         const carousel = document.getElementById('imageCarousel');
                         const firstSlide = carousel.querySelector('.carousel-slide img');
                         if (firstSlide) {
-                            firstSlide.src = bazar.image;
+                            firstSlide.src = bazar.image || bazar.imagem;
                         }
                     }
                 }
