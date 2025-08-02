@@ -6,6 +6,7 @@
     <title>Meu Perfil - FashionSpace</title>
     <link rel="stylesheet" href="perfil-style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="sidebar" id="sidebar">
@@ -131,7 +132,7 @@
 
                 <div class="details-section">
                     <h3>Meus Bazares</h3>
-                    <div class="bazares-list">
+                    <div class="bazares-list" id="userBazaresList">
                         <!-- Bazares serão carregados dinamicamente -->
                     </div>
                 </div>
@@ -185,8 +186,58 @@
             updateDarkModeText();
         }
         
+        // Carregar bazares do usuário
+        function loadUserBazares() {
+            const userBazares = JSON.parse(localStorage.getItem('userBazares') || '[]');
+            const container = document.getElementById('userBazaresList');
+            
+            if (userBazares.length === 0) {
+                container.innerHTML = '<p>Você ainda não criou nenhum bazar.</p>';
+                return;
+            }
+            
+            container.innerHTML = userBazares.map(bazar => `
+                <div class="user-bazar-card">
+                    <img src="${bazar.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=120&fit=crop'}" alt="${bazar.nome}">
+                    <div class="bazar-info">
+                        <h4>${bazar.nome}</h4>
+                        <p>${bazar.descricao}</p>
+                        <span>${bazar.cidade}</span>
+                    </div>
+                    <div class="bazar-actions">
+                        <button class="edit-bazar-btn" onclick="editBazar(${bazar.id})">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="delete-bazar-btn" onclick="deleteBazar(${bazar.id})">
+                            <i class="fas fa-trash"></i> Excluir
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function editBazar(id) {
+            localStorage.setItem('editBazarId', id);
+            window.location.href = 'editar-bazar.html';
+        }
+        
+        function deleteBazar(id) {
+            if (confirm('Tem certeza que deseja excluir este bazar?')) {
+                let userBazares = JSON.parse(localStorage.getItem('userBazares') || '[]');
+                userBazares = userBazares.filter(bazar => bazar.id != id);
+                localStorage.setItem('userBazares', JSON.stringify(userBazares));
+                
+                let allBazares = JSON.parse(localStorage.getItem('fashionspace_bazares') || '[]');
+                allBazares = allBazares.filter(bazar => bazar.id != id);
+                localStorage.setItem('fashionspace_bazares', JSON.stringify(allBazares));
+                
+                loadUserBazares();
+            }
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             applyDarkMode();
+            loadUserBazares();
             
             document.getElementById('menuToggle').addEventListener('click', function() {
                 document.getElementById('sidebar').classList.toggle('active');

@@ -469,6 +469,37 @@ body {
     color: #e0e0e0 !important;
 }
 
+.dark-mode body {
+    background: #1a1a1a !important;
+}
+
+.dark-mode .container {
+    background: #2d2d2d !important;
+    border: 2px solid #555555 !important;
+}
+
+.dark-mode .favorites-content {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .favorites-header h1 {
+    color: #ffffff !important;
+}
+
+.dark-mode .empty-state {
+    background: #3d3d3d !important;
+    border: 2px solid #555555 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+.dark-mode .empty-state h2 {
+    color: #ffffff !important;
+}
+
+.dark-mode .empty-state p {
+    color: #e0e0e0 !important;
+}
+
 .dark-mode .favorite-card {
     background: #3d3d3d !important;
     border-color: #4d4d4d !important;

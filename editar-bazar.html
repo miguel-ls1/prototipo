@@ -1,131 +1,216 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Bazar - FashionSpace</title>
-    <link rel="stylesheet" href="editar-bazar-style.css">
+    <link rel="stylesheet" href="style3.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <button class="back-btn" onclick="window.location.href='perfil.html'">
-                <i class="fas fa-arrow-left"></i>
-                Voltar ao Perfil
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/Image.png" alt="Logo" class="sidebar-logo">
+            <h3>FashionSpace</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="#bazares"><i class="fas fa-store"></i> Bazares</a></li>
+            <li><a href="favoritos.html"><i class="fas fa-heart"></i> Favoritos</a></li>
+            <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+            <li><a href="#" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> <span id="darkModeText">Modo Escuro</span></a></li>
+        </ul>
+    </nav>
+    
+    <div class="main-content">
+        <nav class="topbar">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
             </button>
-            <h1>Editar Bazar</h1>
-            <div class="status-toggle">
-                <label class="switch">
-                    <input type="checkbox" id="statusToggle" checked>
-                    <span class="slider"></span>
-                </label>
-                <span id="statusLabel">Ativo</span>
-            </div>
-        </header>
-
-        <form class="bazar-form" id="editBazarForm">
-            <div class="image-upload-section">
-                <div class="image-preview has-image" id="imagePreview">
-                    <img src="https://via.placeholder.com/200x200/2196F3/white?text=Bazar" alt="Preview">
-                </div>
-                <input type="file" id="imageInput" accept="image/*" hidden>
-                <button type="button" class="upload-btn" onclick="document.getElementById('imageInput').click()">
-                    <i class="fas fa-camera"></i>
-                    Alterar Imagem
+            <h2 style="color: white; flex: 1; text-align: center; margin: 0;">Editar Bazar</h2>
+            <div class="header-actions">
+                <button class="add-bazar-btn" onclick="window.location.href='adicionar-bazar.html'">
+                    <i class="fas fa-plus"></i>
+                    Adicionar Bazar
+                </button>
+                <button class="profile-btn" onclick="window.location.href='perfil.html'">
+                    <i class="fas fa-user-circle"></i>
+                    Perfil
                 </button>
             </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="nome">Nome do Bazar *</label>
-                    <input type="text" id="nome" name="nome" value="Bazar Vintage Maria" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="cep">CEP *</label>
-                    <input type="text" id="cep" name="cep" value="01234-567" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="endereco">Endereço *</label>
-                    <input type="text" id="endereco" name="endereco" value="Rua das Flores" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="numero">Número</label>
-                    <input type="text" id="numero" name="numero" value="123">
-                </div>
-
-                <div class="form-group">
-                    <label for="bairro">Bairro *</label>
-                    <input type="text" id="bairro" name="bairro" value="Centro" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="cidade">Cidade *</label>
-                    <input type="text" id="cidade" name="cidade" value="São Paulo" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="telefone">Telefone</label>
-                    <input type="tel" id="telefone" name="telefone" value="(11) 99999-9999">
-                </div>
-
-                <div class="form-group">
-                    <label for="horario">Horário de Funcionamento</label>
-                    <input type="text" id="horario" name="horario" value="09:00 - 18:00">
-                </div>
-            </div>
-
-            <div class="form-group full-width">
-                <label for="descricao">Descrição do Bazar *</label>
-                <textarea id="descricao" name="descricao" rows="4" required>Roupas vintage dos anos 80 e 90, peças únicas e exclusivas com muito estilo e personalidade.</textarea>
-            </div>
-
-            <div class="stats-section">
-                <h3>Estatísticas do Bazar</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <i class="fas fa-eye"></i>
-                        <div>
-                            <span class="stat-number">1,234</span>
-                            <span class="stat-label">Visualizações</span>
-                        </div>
-                    </div>
-                    <div class="stat-item">
-                        <i class="fas fa-heart"></i>
-                        <div>
-                            <span class="stat-number">89</span>
-                            <span class="stat-label">Curtidas</span>
-                        </div>
-                    </div>
-                    <div class="stat-item">
-                        <i class="fas fa-calendar"></i>
-                        <div>
-                            <span class="stat-number">15</span>
-                            <span class="stat-label">Dias Online</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-actions">
-                <button type="button" class="delete-btn" onclick="deletarBazar()">
-                    <i class="fas fa-trash"></i>
-                    Excluir Bazar
+        </nav>
+        
+        <div class="container">
+            <div class="form-header">
+                <button class="back-btn" onclick="window.location.href='perfil.html'">
+                    <i class="fas fa-arrow-left"></i>
+                    Voltar ao Perfil
                 </button>
-                <div class="action-buttons">
-                    <button type="button" class="cancel-btn" onclick="window.location.href='perfil.html'">Cancelar</button>
-                    <button type="submit" class="save-btn">
+                <h1><i class="fas fa-edit"></i> Editar Bazar</h1>
+            </div>
+
+            <form class="bazar-form" id="editBazarForm">
+                <div class="form-section">
+                    <h2><i class="fas fa-info-circle"></i> Informações Básicas</h2>
+                    
+                    <div class="form-group">
+                        <label for="nome">Nome do Bazar *</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descricao">Descrição *</label>
+                        <textarea id="descricao" name="descricao" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">Categoria *</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">Selecione uma categoria</option>
+                            <option value="luxo">Bazar de Luxo</option>
+                            <option value="sebo">Sebo</option>
+                            <option value="vintage">Vintage</option>
+                            <option value="outlet">Outlet</option>
+                            <option value="artesanal">Artesanal</option>
+                            <option value="infantil">Infantil</option>
+                            <option value="fitness">Fitness</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageInput">Imagem do Bazar</label>
+                        <div class="image-upload">
+                            <input type="file" id="imageInput" accept="image/*" hidden>
+                            <div class="image-preview" id="imagePreview">
+                                <i class="fas fa-camera"></i>
+                                <span>Clique para alterar a imagem</span>
+                            </div>
+                            <button type="button" class="upload-btn" onclick="document.getElementById('imageInput').click()">
+                                <i class="fas fa-edit"></i>
+                                Alterar Imagem
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2><i class="fas fa-map-marker-alt"></i> Localização</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cep">CEP *</label>
+                            <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cidade">Cidade *</label>
+                            <input type="text" id="cidade" name="cidade" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endereco">Endereço *</label>
+                        <input type="text" id="endereco" name="endereco" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="numero">Número</label>
+                            <input type="text" id="numero" name="numero">
+                        </div>
+                        <div class="form-group">
+                            <label for="bairro">Bairro *</label>
+                            <input type="text" id="bairro" name="bairro" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2><i class="fas fa-phone"></i> Contato</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="horario">Horário de Funcionamento</label>
+                            <input type="text" id="horario" name="horario" placeholder="Ex: 9h às 18h">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" onclick="window.location.href='perfil.html'">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button type="submit" class="submit-btn">
                         <i class="fas fa-save"></i>
                         Salvar Alterações
                     </button>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 
+    <script>
+        function toggleDarkMode() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            localStorage.setItem('darkMode', !isDark);
+            applyDarkMode();
+        }
+        
+        function applyDarkMode() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.body.classList.toggle('dark-mode', isDark);
+            updateDarkModeText();
+        }
+        
+        function updateDarkModeText() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            const darkModeText = document.getElementById('darkModeText');
+            if (darkModeText) {
+                darkModeText.textContent = isDark ? 'Modo Claro' : 'Modo Escuro';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            applyDarkMode();
+            
+            document.getElementById('menuToggle').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('active');
+                document.querySelector('.main-content').classList.toggle('shifted');
+            });
+            
+            loadBazarData();
+        });
+        
+        function loadBazarData() {
+            const bazarId = localStorage.getItem('editBazarId');
+            const userBazares = JSON.parse(localStorage.getItem('userBazares') || '[]');
+            const bazar = userBazares.find(b => b.id == bazarId);
+            
+            if (bazar) {
+                document.getElementById('nome').value = bazar.nome || '';
+                document.getElementById('descricao').value = bazar.descricao || '';
+                document.getElementById('cep').value = bazar.cep || '';
+                document.getElementById('cidade').value = bazar.cidade || '';
+                document.getElementById('endereco').value = bazar.endereco || '';
+                document.getElementById('numero').value = bazar.numero || '';
+                document.getElementById('bairro').value = bazar.bairro || '';
+                document.getElementById('telefone').value = bazar.telefone || '';
+                document.getElementById('horario').value = bazar.horario || '';
+                document.getElementById('categoria').value = bazar.categoria || '';
+                
+                if (bazar.image) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.innerHTML = `<img src="${bazar.image}" alt="Preview">`;
+                    preview.classList.add('has-image');
+                }
+            }
+        }
+    </script>
     <script src="editar-bazar-script.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', 'Inter', sans-serif;
 }
 
 body {
@@ -414,6 +415,220 @@ body {
 
 .dark-mode .sidebar {
     background: #1a1a1a !important;
+}
+
+/* NOTIFICAÇÕES */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: -300px;
+    background: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    min-width: 250px;
+}
+
+.notification.show {
+    right: 20px;
+}
+
+.notification.success {
+    background: #4CAF50;
+}
+
+.notification.error {
+    background: #f44336;
+}
+
+.notification i {
+    font-size: 16px;
+}
+
+.dark-mode .notification.success {
+    background: #2d5a2d;
+}
+
+.dark-mode .notification.error {
+    background: #5a2d2d;
+}
+
+.dark-mode body {
+    background: #1a1a1a !important;
+}
+
+.dark-mode .container {
+    background: #2d2d2d !important;
+    border: 2px solid #555555 !important;
+}
+
+.dark-mode .form-section {
+    background: #3d3d3d !important;
+    border: 2px solid #555555 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+.dark-mode .form-section h2 {
+    color: #ffffff !important;
+}
+
+.dark-mode .form-group label {
+    color: #ffffff !important;
+}
+
+.dark-mode .form-header h1 {
+    color: #ffffff !important;
+}
+
+.dark-mode .bazar-form {
+    background: #2d2d2d !important;
+}
+
+.dark-mode input, .dark-mode textarea {
+    background: #4d4d4d !important;
+    color: #ffffff !important;
+    border: 2px solid #666666 !important;
+}
+
+.dark-mode input::placeholder, .dark-mode textarea::placeholder {
+    color: #cccccc !important;
+}
+
+.dark-mode select {
+    background: #4d4d4d !important;
+    color: #ffffff !important;
+    border: 2px solid #666666 !important;
+}
+
+.dark-mode select option {
+    background: #4d4d4d !important;
+    color: #ffffff !important;
+}
+
+.image-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.upload-btn {
+    background: #5f81a5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+    background: #0f2c47;
+    transform: translateY(-1px);
+}
+
+/* RESPONSIVE - iPhone SE */
+@media (max-width: 375px) {
+    .topbar {
+        padding: 10px 15px;
+    }
+    
+    .header-actions {
+        gap: 5px;
+    }
+    
+    .add-bazar-btn, .profile-btn {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+    
+    .add-bazar-btn span, .profile-btn span {
+        display: none;
+    }
+    
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .form-header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .form-group label {
+        font-size: 13px;
+    }
+    
+    .form-group input, .form-group textarea, .form-group select {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .image-upload-section {
+        margin-bottom: 20px;
+    }
+    
+    .image-preview {
+        height: 150px;
+    }
+    
+    .upload-btn {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .cancel-btn, .submit-btn {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    .sidebar {
+        width: 280px;
+        left: -280px;
+    }
+    
+    .main-content.shifted {
+        margin-left: 0;
+    }
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    outline: none;
+    border-color: #5f81a5;
+    box-shadow: 0 0 0 3px rgba(95, 129, 165, 0.1);
 }
 
 .dark-mode .container {

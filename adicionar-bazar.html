@@ -6,6 +6,7 @@
     <title>Adicionar Novo Bazar</title>
     <link rel="stylesheet" href="style3.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="sidebar" id="sidebar">
@@ -107,6 +108,20 @@
             <div class="form-group full-width">
                 <label for="descricao">Descrição do Bazar *</label>
                 <textarea id="descricao" name="descricao" rows="4" placeholder="Descreva o bazar, produtos vendidos, especialidades..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoria *</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="">Selecione uma categoria</option>
+                    <option value="luxo">Bazar de Luxo</option>
+                    <option value="sebo">Sebo</option>
+                    <option value="vintage">Vintage</option>
+                    <option value="outlet">Outlet</option>
+                    <option value="artesanal">Artesanal</option>
+                    <option value="infantil">Infantil</option>
+                    <option value="fitness">Fitness</option>
+                </select>
             </div>
 
             <div class="form-actions">

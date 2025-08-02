@@ -369,7 +369,7 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .menu-toggle {
@@ -486,6 +486,68 @@ body {
 .dark-mode .info-section p {
     color: #b0b0b0 !important;
 }
+
+.dark-mode body {
+    background: #1a1a1a !important;
+}
+
+.dark-mode .container {
+    background: #2d2d2d !important;
+    border: 2px solid #555555 !important;
+}
+
+.dark-mode .header h1 {
+    color: #ffffff !important;
+}
+
+.dark-mode .bazar-content {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .image-gallery {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .bazar-info {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .info-section {
+    background: #3d3d3d !important;
+    border: 2px solid #555555 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+.dark-mode .info-section h2 {
+    color: #ffffff !important;
+}
+
+.dark-mode .info-section p {
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .info-item {
+    color: #e0e0e0 !important;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-badge.luxo { background: #ffd700; color: #333; }
+.category-badge.sebo { background: #8b4513; color: white; }
+.category-badge.vintage { background: #dda0dd; color: #333; }
+.category-badge.outlet { background: #ff6347; color: white; }
+.category-badge.artesanal { background: #32cd32; color: white; }
+.category-badge.infantil { background: #ff69b4; color: white; }
+.category-badge.fitness { background: #1e90ff; color: white; }
 
 @media (max-width: 768px) {
     .container {

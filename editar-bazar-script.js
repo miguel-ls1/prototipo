@@ -1,18 +1,4 @@
-// Status toggle functionality
-const statusToggle = document.getElementById('statusToggle');
-const statusLabel = document.getElementById('statusLabel');
-
-statusToggle.addEventListener('change', function() {
-    if (this.checked) {
-        statusLabel.textContent = 'Ativo';
-        statusLabel.style.color = '#4CAF50';
-    } else {
-        statusLabel.textContent = 'Inativo';
-        statusLabel.style.color = '#f39c12';
-    }
-});
-
-// Image upload functionality
+// Manipulação da imagem
 document.getElementById('imageInput').addEventListener('change', function(e) {
     const file = e.target.files[0];
     const preview = document.getElementById('imagePreview');
@@ -27,7 +13,7 @@ document.getElementById('imageInput').addEventListener('change', function(e) {
     }
 });
 
-// CEP mask
+// Máscara para CEP
 document.getElementById('cep').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length <= 8) {
@@ -36,7 +22,7 @@ document.getElementById('cep').addEventListener('input', function(e) {
     }
 });
 
-// Phone mask
+// Máscara para telefone
 document.getElementById('telefone').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length <= 11) {
@@ -49,7 +35,7 @@ document.getElementById('telefone').addEventListener('input', function(e) {
     }
 });
 
-// CEP lookup
+// Buscar endereço pelo CEP
 document.getElementById('cep').addEventListener('blur', function(e) {
     const cep = e.target.value.replace(/\D/g, '');
     
@@ -58,9 +44,9 @@ document.getElementById('cep').addEventListener('blur', function(e) {
             .then(response => response.json())
             .then(data => {
                 if (!data.erro) {
-                    document.getElementById('endereco').value = data.logradouro || document.getElementById('endereco').value;
-                    document.getElementById('bairro').value = data.bairro || document.getElementById('bairro').value;
-                    document.getElementById('cidade').value = data.localidade || document.getElementById('cidade').value;
+                    document.getElementById('endereco').value = data.logradouro || '';
+                    document.getElementById('bairro').value = data.bairro || '';
+                    document.getElementById('cidade').value = data.localidade || '';
                 }
             })
             .catch(error => {
@@ -69,108 +55,95 @@ document.getElementById('cep').addEventListener('blur', function(e) {
     }
 });
 
-// Form submission
+// Submissão do formulário de edição
 document.getElementById('editBazarForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Validation
-    const requiredFields = ['nome', 'cep', 'endereco', 'bairro', 'cidade', 'descricao'];
-    let isValid = true;
+    const bazarId = localStorage.getItem('editBazarId');
+    const userBazares = JSON.parse(localStorage.getItem('userBazares') || '[]');
+    const bazarIndex = userBazares.findIndex(b => b.id == bazarId);
     
-    requiredFields.forEach(field => {
-        const input = document.getElementById(field);
-        if (!input.value.trim()) {
-            input.style.borderColor = '#f44336';
-            isValid = false;
-        } else {
-            input.style.borderColor = '#e1e5e9';
-        }
-    });
-    
-    if (!isValid) {
-        showMessage('Por favor, preencha todos os campos obrigatórios.', 'error');
+    if (bazarIndex === -1) {
+        alert('Bazar não encontrado!');
         return;
     }
     
-    // Simulate saving
-    const saveBtn = document.querySelector('.save-btn');
-    const originalText = saveBtn.innerHTML;
+    // Coletar dados do formulário
+    const formData = {
+        id: parseInt(bazarId),
+        nome: document.getElementById('nome').value.trim(),
+        cep: document.getElementById('cep').value.trim(),
+        endereco: document.getElementById('endereco').value.trim(),
+        numero: document.getElementById('numero').value.trim(),
+        bairro: document.getElementById('bairro').value.trim(),
+        cidade: document.getElementById('cidade').value.trim(),
+        telefone: document.getElementById('telefone').value.trim(),
+        horario: document.getElementById('horario').value.trim(),
+        descricao: document.getElementById('descricao').value.trim(),
+        categoria: document.getElementById('categoria').value,
+        image: null,
+        criadoEm: userBazares[bazarIndex].criadoEm,
+        editadoEm: new Date().toISOString()
+    };
     
-    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
-    saveBtn.disabled = true;
+    // Capturar imagem se houver
+    const imagePreview = document.getElementById('imagePreview');
+    const img = imagePreview.querySelector('img');
+    if (img) {
+        formData.image = img.src;
+        formData.imagem = img.src;
+    }
     
+    // Atualizar bazar
+    userBazares[bazarIndex] = formData;
+    localStorage.setItem('userBazares', JSON.stringify(userBazares));
+    
+    // Também atualizar em fashionspace_bazares se existir
+    const allBazares = JSON.parse(localStorage.getItem('fashionspace_bazares') || '[]');
+    const allBazarIndex = allBazares.findIndex(b => b.id == bazarId);
+    if (allBazarIndex !== -1) {
+        allBazares[allBazarIndex] = formData;
+        localStorage.setItem('fashionspace_bazares', JSON.stringify(allBazares));
+    }
+    
+    showNotification('Bazar atualizado com sucesso!', 'success');
     setTimeout(() => {
-        showMessage('Bazar atualizado com sucesso!', 'success');
-        saveBtn.innerHTML = originalText;
-        saveBtn.disabled = false;
-        
-        // Redirect after 2 seconds
-        setTimeout(() => {
-            window.location.href = 'perfil.html';
-        }, 2000);
-    }, 1500);
+        window.location.href = 'perfil.html';
+    }, 2000);
 });
 
-// Delete bazar function
-function deletarBazar() {
-    if (confirm('Tem certeza que deseja excluir este bazar? Esta ação não pode ser desfeita.')) {
-        const deleteBtn = document.querySelector('.delete-btn');
-        const originalText = deleteBtn.innerHTML;
-        
-        deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Excluindo...';
-        deleteBtn.disabled = true;
-        
-        setTimeout(() => {
-            showMessage('Bazar excluído com sucesso!', 'success');
-            
-            setTimeout(() => {
-                window.location.href = 'perfil.html';
-            }, 1500);
-        }, 1000);
-    }
-}
-
-// Show message function
-function showMessage(text, type) {
-    // Remove existing messages
-    const existingMessages = document.querySelectorAll('.success-message, .error-message');
-    existingMessages.forEach(msg => msg.remove());
-    
-    const messageDiv = document.createElement('div');
-    messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
-    messageDiv.innerHTML = `
-        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
-        ${text}
-    `;
-    messageDiv.style.display = 'flex';
-    
-    const form = document.querySelector('.bazar-form');
-    form.insertBefore(messageDiv, form.firstChild);
-    
-    // Remove message after 5 seconds
-    setTimeout(() => {
-        messageDiv.remove();
-    }, 5000);
-}
-
-// Click on image preview to upload
+// Adicionar click no preview da imagem
 document.getElementById('imagePreview').addEventListener('click', function() {
     document.getElementById('imageInput').click();
 });
 
-// Initialize page
-document.addEventListener('DOMContentLoaded', function() {
-    // Set initial status
-    statusLabel.style.color = statusToggle.checked ? '#4CAF50' : '#f39c12';
+// Função de notificação
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+        <span>${message}</span>
+    `;
     
-    // Add hover effects to stat items
-    document.querySelectorAll('.stat-item').forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            item.style.transform = 'translateY(-3px) scale(1.02)';
-        });
-        
-        item.addEventListener('mouseleave', () => {
-            item.style.transform = 'translateY(0) scale(1)';
-        });
-    });
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// Verificar se está logado
+document.addEventListener('DOMContentLoaded', () => {
+    const isLoggedIn = localStorage.getItem('fashionspace_logged_in');
+    if (isLoggedIn !== 'true') {
+        window.location.href = 'login.html';
+    }
 });

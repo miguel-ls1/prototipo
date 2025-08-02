@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', 'Inter', sans-serif;
 }
 
 body {
@@ -653,6 +654,158 @@ body {
 
 .dark-mode .profile-card p {
     color: #b0b0b0 !important;
+}
+
+/* BAZARES DO USUÁRIO */
+.user-bazar-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #e9ecef;
+}
+
+.user-bazar-card img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.bazar-info {
+    flex: 1;
+}
+
+.bazar-info h4 {
+    margin: 0 0 5px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.bazar-info p {
+    margin: 0 0 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.bazar-info span {
+    color: #888;
+    font-size: 12px;
+}
+
+.edit-bazar-btn {
+    background: #5f81a5;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.edit-bazar-btn:hover {
+    background: #0f2c47;
+}
+
+.dark-mode .user-bazar-card {
+    background: #3d3d3d !important;
+    border: 2px solid #555555 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+.dark-mode .bazar-info h4 {
+    color: #ffffff !important;
+}
+
+.dark-mode .bazar-info p {
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .bazar-info span {
+    color: #888 !important;
+}
+
+.bazar-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.delete-bazar-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.delete-bazar-btn:hover {
+    background: #c82333;
+}
+
+.dark-mode body {
+    background: #1a1a1a !important;
+}
+
+.dark-mode .container {
+    background: #2d2d2d !important;
+    border: 2px solid #555555 !important;
+}
+
+.dark-mode .profile-content {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .details-section {
+    background: #3d3d3d !important;
+    border: 2px solid #555555 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+.dark-mode .details-section h3 {
+    color: #ffffff !important;
+}
+
+.dark-mode .info-item label {
+    color: #ffffff !important;
+}
+
+.dark-mode .info-item span {
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .modal-content {
+    background: #2d2d2d !important;
+    color: #ffffff !important;
+    border: 2px solid #555555 !important;
+}
+
+.dark-mode .stats-grid {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .stat-card {
+    background: #3d3d3d !important;
+    border: 2px solid #555555 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+.dark-mode .stat-number {
+    color: #ffffff !important;
+}
+
+.dark-mode .stat-label {
+    color: #e0e0e0 !important;
 }
 
 /* RESPONSIVE */

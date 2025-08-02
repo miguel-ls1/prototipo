@@ -83,6 +83,7 @@
             <div class="bazar-info">
                 <div class="info-section">
                     <h2>Sobre o Bazar</h2>
+                    <div class="category-badge" id="bazarCategory"></div>
                     <p id="bazarDescription">Carregando descrição...</p>
                 </div>
 
@@ -133,13 +134,427 @@
             updateDarkModeText();
         }
         
+        // Dados fictícios dos bazares
+        const bazaresFicticios = {
+            'Bazar da Moda Vintage': {
+                categoria: 'vintage',
+                endereco: 'Rua Augusta, 1234',
+                numero: '1234',
+                bairro: 'Consolação',
+                cidade: 'São Paulo',
+                cep: '01305-100',
+                telefone: '(11) 3456-7890',
+                horario: '10h às 19h',
+                descricao: 'Peças únicas e exclusivas dos anos 80 e 90. Encontre roupas vintage autênticas, acessórios retrô e itens de colecionador. Especializado em moda feminina vintage com peças garimpadas especialmente para você.',
+                images: [
+                    'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&h=400&fit=crop'
+                ]
+            },
+            'Outlet Independente': {
+                categoria: 'outlet',
+                endereco: 'Av. Copacabana, 567',
+                numero: '567',
+                bairro: 'Copacabana',
+                cidade: 'Rio de Janeiro',
+                cep: '22070-011',
+                telefone: '(21) 2345-6789',
+                horario: '9h às 20h',
+                descricao: 'Outlet com as melhores marcas nacionais e internacionais. Descontos de até 70% em roupas, calçados e acessórios. Renovação de estoque semanal com novidades imperdíveis.',
+                images: [
+                    'https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&h=400&fit=crop'
+                ]
+            },
+            'Garimpo Fashion': {
+                categoria: 'sebo',
+                endereco: 'Rua Online Virtual, 100',
+                numero: '100',
+                bairro: 'Centro',
+                cidade: 'Online',
+                cep: '00000-000',
+                telefone: '(11) 9999-8888',
+                horario: '24h online',
+                descricao: 'Brechó online especializado em garimpar peças únicas e especiais. Roupas seminovas de qualidade, vintage e contemporâneas. Entrega para todo o Brasil.',
+                images: [
+                    'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=600&h=400&fit=crop'
+                ]
+            },
+            'Feira de Artesãos': {
+                categoria: 'artesanal',
+                endereco: 'Largo do Pelourinho, 45',
+                numero: '45',
+                bairro: 'Pelourinho',
+                cidade: 'Salvador',
+                cep: '40026-280',
+                telefone: '(71) 3234-5678',
+                horario: '8h às 17h',
+                descricao: 'Feira tradicional com artesãos locais. Roupas feitas à mão, bordados típicos da Bahia, acessórios únicos e peças exclusivas da cultura nordestina.'
+            },
+            'Vintage Store': {
+                categoria: 'vintage',
+                endereco: 'Rua da Praia, 789',
+                numero: '789',
+                bairro: 'Centro Histórico',
+                cidade: 'Porto Alegre',
+                cep: '90010-040',
+                telefone: '(51) 3345-6789',
+                horario: '10h às 18h',
+                descricao: 'Loja especializada em peças vintage autênticas dos anos 70-90. Jaquetas de couro, vestidos retrô, acessórios vintage e itens de colecionador.'
+            },
+            'Outlet Fashion': {
+                categoria: 'outlet',
+                endereco: 'Av. Afonso Pena, 1500',
+                numero: '1500',
+                bairro: 'Centro',
+                cidade: 'Belo Horizonte',
+                cep: '30130-005',
+                telefone: '(31) 3456-7890',
+                horario: '9h às 21h',
+                descricao: 'Outlet com marcas famosas e descontos imperdíveis. Roupas masculinas e femininas, calçados e acessórios com até 80% de desconto.'
+            },
+            'Brechó Chique': {
+                categoria: 'sebo',
+                endereco: 'Rua do Bom Jesus, 234',
+                numero: '234',
+                bairro: 'Recife Antigo',
+                cidade: 'Recife',
+                cep: '50030-170',
+                telefone: '(81) 3234-5678',
+                horario: '10h às 19h',
+                descricao: 'Brechó sofisticado com roupas de grife seminovas. Peças selecionadas de alta qualidade, bolsas de marca e acessórios exclusivos.'
+            },
+            'Moda Infantil': {
+                categoria: 'infantil',
+                endereco: 'Av. Eduardo Ribeiro, 678',
+                numero: '678',
+                bairro: 'Centro',
+                cidade: 'Manaus',
+                cep: '69010-001',
+                telefone: '(92) 3345-6789',
+                horario: '8h às 18h',
+                descricao: 'Especializada em moda infantil fofa e confortável. Roupas para bebês e crianças até 12 anos, com tecidos de qualidade e designs encantadores.'
+            },
+            'Street Fashion': {
+                categoria: 'fitness',
+                endereco: 'Rua das Rendeiras, 456',
+                numero: '456',
+                bairro: 'Lagoa da Conceição',
+                cidade: 'Florianópolis',
+                cep: '88062-050',
+                telefone: '(48) 3456-7890',
+                horario: '9h às 20h',
+                descricao: 'Moda urbana e streetwear para quem gosta de estilo despojado. Roupas esportivas, tênis exclusivos e acessórios urbanos.'
+            },
+            'Moda Executiva': {
+                categoria: 'luxo',
+                endereco: 'Av. Jerônimo Monteiro, 321',
+                numero: '321',
+                bairro: 'Centro',
+                cidade: 'Vitória',
+                cep: '29010-001',
+                telefone: '(27) 3234-5678',
+                horario: '8h às 19h',
+                descricao: 'Roupas sociais e profissionais de alta qualidade. Ternos sob medida, camisas sociais, sapatos de couro e acessórios executivos.'
+            },
+            'Boho Style': {
+                categoria: 'vintage',
+                endereco: 'Rua das Trincheiras, 159',
+                numero: '159',
+                bairro: 'Centro Histórico',
+                cidade: 'João Pessoa',
+                cep: '58013-120',
+                telefone: '(83) 3345-6789',
+                horario: '10h às 18h',
+                descricao: 'Estilo boêmio e hippie chic com peças únicas. Vestidos fluidos, acessórios artesanais e roupas com estampas étnicas.',
+                images: [
+                    'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&h=400&fit=crop'
+                ]
+            },
+            'Moda Plus Size': {
+                categoria: 'infantil',
+                endereco: 'Av. T-4, 890',
+                numero: '890',
+                bairro: 'Setor Bueno',
+                cidade: 'Goiânia',
+                cep: '74210-030',
+                telefone: '(62) 3456-7890',
+                horario: '9h às 19h',
+                descricao: 'Moda inclusiva e estilosa para todos os tamanhos. Roupas plus size modernas, confortáveis e cheias de personalidade.',
+                images: [
+                    'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&h=400&fit=crop'
+                ]
+            },
+            'Moda Jovem': {
+                categoria: 'infantil',
+                endereco: 'Av. Beira Mar, 567',
+                numero: '567',
+                bairro: 'Meireles',
+                cidade: 'Fortaleza',
+                cep: '60165-121',
+                telefone: '(85) 3234-5678',
+                horario: '10h às 20h',
+                descricao: 'Tendências para o público jovem e adolescente. Roupas descoladas, acessórios modernos e estilo urbano.',
+                images: [
+                    'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1503944583220-79d8926ad5e2?w=600&h=400&fit=crop'
+                ]
+            },
+            'Bazar Sustentável': {
+                categoria: 'artesanal',
+                endereco: 'SQN 308, Bloco A',
+                numero: '15',
+                bairro: 'Asa Norte',
+                cidade: 'Brasília',
+                cep: '70747-010',
+                telefone: '(61) 3345-6789',
+                horario: '9h às 18h',
+                descricao: 'Moda consciente e sustentável com materiais ecológicos. Roupas orgânicas, algodão sustentável e produção ética.',
+                images: [
+                    'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&h=400&fit=crop'
+                ]
+            },
+            'Bazar Premium': {
+                categoria: 'luxo',
+                endereco: 'Rua XV de Novembro, 890',
+                numero: '890',
+                bairro: 'Centro',
+                cidade: 'Curitiba',
+                cep: '80020-310',
+                telefone: '(41) 3456-7890',
+                horario: '10h às 20h',
+                descricao: 'Roupas de grife com preços acessíveis. Marcas premium, peças exclusivas e atendimento personalizado.',
+                images: [
+                    'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&h=400&fit=crop'
+                ]
+            },
+            'Fashion Market': {
+                categoria: 'artesanal',
+                endereco: 'Av. Afonso Pena, 1200',
+                numero: '1200',
+                bairro: 'Centro',
+                cidade: 'Belo Horizonte',
+                cep: '30112-000',
+                telefone: '(31) 3234-5678',
+                horario: '9h às 19h',
+                descricao: 'Feira de moda com marcas independentes. Designers locais, peças autorais e moda sustentável.',
+                images: [
+                    'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&h=400&fit=crop'
+                ]
+            },
+            'Vintage Paradise': {
+                categoria: 'vintage',
+                endereco: 'Rua Chile, 456',
+                numero: '456',
+                bairro: 'Pelourinho',
+                cidade: 'Salvador',
+                cep: '40026-010',
+                telefone: '(71) 3345-6789',
+                horario: '10h às 18h',
+                descricao: 'Paraíso das roupas vintage e retrô. Peças dos anos 60, 70 e 80 em perfeito estado.',
+                images: [
+                    'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=400&fit=crop'
+                ]
+            },
+            'Street Style Expo': {
+                categoria: 'fitness',
+                endereco: 'Av. Boa Viagem, 789',
+                numero: '789',
+                bairro: 'Boa Viagem',
+                cidade: 'Recife',
+                cep: '51111-000',
+                telefone: '(81) 3456-7890',
+                horario: '9h às 21h',
+                descricao: 'Exposição de moda urbana e streetwear. Tênis exclusivos, roupas esportivas e acessórios urbanos.',
+                images: [
+                    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=600&h=400&fit=crop'
+                ]
+            },
+            'Plus Size Fashion': {
+                categoria: 'infantil',
+                endereco: 'Av. Beira Mar, 321',
+                numero: '321',
+                bairro: 'Aldeota',
+                cidade: 'Fortaleza',
+                cep: '60165-121',
+                telefone: '(85) 3234-5678',
+                horario: '10h às 20h',
+                descricao: 'Moda inclusiva e diversidade de tamanhos. Roupas plus size modernas e estilosas.',
+                images: [
+                    'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1503944583220-79d8926ad5e2?w=600&h=400&fit=crop'
+                ]
+            },
+            'Fitness Fashion': {
+                categoria: 'fitness',
+                endereco: 'SQS 308, Bloco B',
+                numero: '25',
+                bairro: 'Asa Sul',
+                cidade: 'Brasília',
+                cep: '70347-020',
+                telefone: '(61) 3456-7890',
+                horario: '6h às 22h',
+                descricao: 'Roupas esportivas e moda fitness. Equipamentos, roupas de academia e acessórios esportivos.',
+                images: [
+                    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=400&fit=crop',
+                    'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=600&h=400&fit=crop'
+                ]
+            }
+        };
+        
+        // Carregar detalhes do bazar
+        function loadBazarDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bazarName = urlParams.get('name');
+            
+            if (bazarName) {
+                const userBazares = JSON.parse(localStorage.getItem('userBazares') || '[]');
+                let bazar = userBazares.find(b => b.nome === bazarName);
+                
+                // Se não encontrar nos bazares do usuário, usar dados fictícios
+                if (!bazar && bazaresFicticios[bazarName]) {
+                    bazar = {
+                        nome: bazarName,
+                        ...bazaresFicticios[bazarName]
+                    };
+                }
+                
+                if (bazar) {
+                    document.getElementById('bazarTitle').textContent = bazar.nome;
+                    document.getElementById('bazarDescription').textContent = bazar.descricao;
+                    document.getElementById('bazarAddress').textContent = `${bazar.endereco}${bazar.numero ? ', ' + bazar.numero : ''} - ${bazar.bairro}, ${bazar.cidade} - CEP: ${bazar.cep}`;
+                    
+                    // Categoria
+                    const categoryNames = {
+                        'luxo': 'Bazar de Luxo',
+                        'sebo': 'Sebo',
+                        'vintage': 'Vintage',
+                        'outlet': 'Outlet',
+                        'artesanal': 'Artesanal',
+                        'infantil': 'Infantil',
+                        'fitness': 'Fitness'
+                    };
+                    
+                    if (bazar.categoria) {
+                        const categoryBadge = document.getElementById('bazarCategory');
+                        categoryBadge.textContent = categoryNames[bazar.categoria] || bazar.categoria;
+                        categoryBadge.className = `category-badge ${bazar.categoria}`;
+                    }
+                    
+                    if (bazar.telefone) {
+                        document.getElementById('phoneInfo').style.display = 'flex';
+                        document.getElementById('bazarPhone').textContent = bazar.telefone;
+                    }
+                    
+                    if (bazar.horario) {
+                        document.getElementById('hoursInfo').style.display = 'flex';
+                        document.getElementById('bazarHours').textContent = bazar.horario;
+                    }
+                    
+                    // Carregar imagens do carrossel
+                    if (bazar.images && bazar.images.length > 0) {
+                        const carousel = document.getElementById('imageCarousel');
+                        carousel.innerHTML = '';
+                        
+                        bazar.images.forEach((imageUrl, index) => {
+                            const slide = document.createElement('div');
+                            slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+                            slide.innerHTML = `<img src="${imageUrl}" alt="${bazar.nome}">`;
+                            carousel.appendChild(slide);
+                        });
+                        
+                        // Atualizar dots
+                        const dotsContainer = document.getElementById('carouselDots');
+                        dotsContainer.innerHTML = '';
+                        bazar.images.forEach((_, index) => {
+                            const dot = document.createElement('span');
+                            dot.className = `dot ${index === 0 ? 'active' : ''}`;
+                            dot.onclick = () => currentSlide(index + 1);
+                            dotsContainer.appendChild(dot);
+                        });
+                    } else if (bazar.image) {
+                        const carousel = document.getElementById('imageCarousel');
+                        const firstSlide = carousel.querySelector('.carousel-slide img');
+                        if (firstSlide) {
+                            firstSlide.src = bazar.image;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Função de compartilhar
+        function shareBazar() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bazarName = urlParams.get('name') || 'Bazar';
+            const url = window.location.href;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: bazarName,
+                    text: `Confira este bazar: ${bazarName}`,
+                    url: url
+                });
+            } else {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Link copiado para a área de transferência!');
+                });
+            }
+        }
+        
+        // Função de direções
+        function getDirections() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bazarName = urlParams.get('name');
+            
+            if (bazarName) {
+                const userBazares = JSON.parse(localStorage.getItem('userBazares') || '[]');
+                const bazar = userBazares.find(b => b.nome === bazarName);
+                
+                let address = '';
+                if (bazar) {
+                    address = `${bazar.endereco}${bazar.numero ? ', ' + bazar.numero : ''}, ${bazar.bairro}, ${bazar.cidade}`;
+                } else {
+                    address = document.getElementById('bazarAddress')?.textContent || bazarName;
+                }
+                
+                const encodedAddress = encodeURIComponent(address);
+                const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
+                window.open(googleMapsUrl, '_blank');
+            }
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             applyDarkMode();
+            loadBazarDetails();
             
             document.getElementById('menuToggle').addEventListener('click', function() {
                 document.getElementById('sidebar').classList.toggle('active');
                 document.querySelector('.main-content').classList.toggle('shifted');
             });
+            
+            // Funções já estão definidas como onclick nos botões HTML
         });
         
         function updateDarkModeText() {

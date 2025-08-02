@@ -60,7 +60,7 @@ document.getElementById('bazarForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
     // Validação básica
-    const requiredFields = ['nome', 'cep', 'endereco', 'bairro', 'cidade', 'descricao'];
+    const requiredFields = ['nome', 'cep', 'endereco', 'bairro', 'cidade', 'descricao', 'categoria'];
     let isValid = true;
     
     requiredFields.forEach(field => {
@@ -90,6 +90,7 @@ document.getElementById('bazarForm').addEventListener('submit', function(e) {
         telefone: document.getElementById('telefone').value.trim(),
         horario: document.getElementById('horario').value.trim(),
         descricao: document.getElementById('descricao').value.trim(),
+        categoria: document.getElementById('categoria').value,
         imagem: null,
         criadoEm: new Date().toISOString()
     };
@@ -99,6 +100,7 @@ document.getElementById('bazarForm').addEventListener('submit', function(e) {
     const img = imagePreview.querySelector('img');
     if (img) {
         formData.imagem = img.src;
+        formData.image = img.src;
     }
     
     // Salvar no localStorage
@@ -117,6 +119,7 @@ document.getElementById('bazarForm').addEventListener('submit', function(e) {
         
         // Salvar no localStorage
         localStorage.setItem('fashionspace_bazares', JSON.stringify(bazares));
+        localStorage.setItem('userBazares', JSON.stringify(bazares));
         
         showMessage('Bazar adicionado com sucesso!', 'success');
         submitBtn.innerHTML = originalText;
