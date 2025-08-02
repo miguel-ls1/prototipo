@@ -98,7 +98,7 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
-                <h1>PARA TODOS<br>MAS NÃO<br>QUALQUER UM</h1>
+                <h1>PARA TODOS,<br>MAS NÃO<br>QUALQUER UM</h1>
                 <p>Conectamos você aos melhores bazares e experiências de moda únicas. Descubra peças exclusivas e tendências autênticas.</p>
                 <div class="hero-buttons">
                     <button class="btn-primary" onclick="document.querySelector('.bazares-grid').scrollIntoView({behavior: 'smooth'})">EXPLORAR AGORA</button>
@@ -163,6 +163,9 @@
                 <div class="carousel" id="carousel">
                     <div class="carousel-card active">
                         <img src="assets/OIP.webp" alt="Bazar Vintage">
+                        <button class="favorite-btn" data-bazar="Bazar da Moda Vintage">
+                            <i class="far fa-heart"></i>
+                        </button>
                         <div class="card-content">
                             <h3>Bazar da Moda Vintage</h3>
                             <p>Peças únicas e exclusivas dos anos 80 e 90</p>
@@ -175,6 +178,9 @@
                     </div>
                     <div class="carousel-card">
                         <img src="assets/OIP.webp" alt="Outlet Fashion">
+                        <button class="favorite-btn" data-bazar="Outlet Independente">
+                            <i class="far fa-heart"></i>
+                        </button>
                         <div class="card-content">
                             <h3>Outlet Independente</h3>
                             <p>Marcas nacionais com até 70% de desconto</p>
@@ -1434,5 +1440,6 @@
     <script src="js/gallery.js"></script>
     <script src="js/simple-notifications.js"></script>
     <script src="js/chat.js"></script>
+    <script src="js/favorites.js"></script>
 </body>
 </html>

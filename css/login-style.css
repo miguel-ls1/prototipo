@@ -175,7 +175,82 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+/* RESPONSIVE - iPhone SE (375px) */
+@media (max-width: 375px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 10px;
+        max-width: 350px;
+    }
+    
+    .form-container {
+        padding: 25px 20px;
+        border-radius: 12px;
+    }
+    
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .logo-section h1 {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    
+    .logo-section p {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .logo-section {
+        margin-bottom: 20px;
+    }
+    
+    .form-wrapper h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
+    }
+    
+    .input-group input {
+        padding: 10px 12px 10px 40px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+    
+    .input-group i {
+        left: 12px;
+        font-size: 14px;
+    }
+    
+    .btn-primary {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+    
+    .switch-form {
+        margin-top: 20px;
+        font-size: 12px;
+    }
+    
+    .error-message {
+        padding: 10px;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+}
+
+/* RESPONSIVE - Tablets */
+@media (max-width: 480px) and (min-width: 376px) {
     .container {
         padding: 15px;
     }

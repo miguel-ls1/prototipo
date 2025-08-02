@@ -235,6 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Carregar dados do usuário
     loadUserData();
     
+    // Carregar analytics dos bazares
+    loadBazarAnalytics();
+    
     // Add hover effects to stat cards
     document.querySelectorAll('.stat-card').forEach(card => {
         card.addEventListener('mouseenter', () => {

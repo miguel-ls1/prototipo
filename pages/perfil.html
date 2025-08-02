@@ -251,10 +251,16 @@
             loadUserBazares();
             loadBazarAnalytics();
             
-            document.getElementById('menuToggle').addEventListener('click', function() {
-                document.getElementById('sidebar').classList.toggle('active');
-                document.querySelector('.main-content').classList.toggle('shifted');
-            });
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (menuToggle && sidebar && mainContent) {
+                menuToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                    mainContent.classList.toggle('shifted');
+                });
+            }
         });
         
         function updateDarkModeText() {

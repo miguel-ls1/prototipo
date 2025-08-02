@@ -808,8 +808,148 @@ body {
     color: #e0e0e0 !important;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
+/* RESPONSIVE - iPhone SE (375px) */
+@media (max-width: 375px) {
+    .topbar {
+        padding: 10px 15px;
+    }
+    
+    .topbar h2 {
+        font-size: 16px;
+    }
+    
+    .header-actions {
+        gap: 5px;
+    }
+    
+    .add-bazar-btn, .profile-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    .add-bazar-btn span, .profile-btn span {
+        display: none;
+    }
+    
+    .container {
+        margin: 5px;
+        border-radius: 10px;
+    }
+    
+    .profile-header {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .profile-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .back-btn, .edit-btn, .logout-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .profile-content {
+        padding: 15px;
+    }
+    
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px 15px;
+    }
+    
+    .profile-avatar img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .avatar-edit {
+        width: 25px;
+        height: 25px;
+        font-size: 10px;
+    }
+    
+    .profile-info h2 {
+        font-size: 1.3rem;
+    }
+    
+    .details-section {
+        padding: 20px 15px;
+    }
+    
+    .details-section h3 {
+        font-size: 1.2rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 15px;
+    }
+    
+    .stat-card i {
+        font-size: 1.5rem;
+        padding: 10px;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .bazar-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .bazar-item img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        padding: 20px;
+        width: 95%;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .cancel-btn, .save-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .sidebar {
+        width: 280px;
+        left: -280px;
+    }
+    
+    .main-content.shifted {
+        margin-left: 0;
+    }
+}
+
+/* RESPONSIVE - Tablets */
+@media (max-width: 768px) and (min-width: 376px) {
     .container {
         margin: 10px;
         border-radius: 15px;
@@ -848,5 +988,9 @@ body {
     
     .form-actions {
         flex-direction: column;
+    }
+    
+    .main-content.shifted {
+        margin-left: 0;
     }
 }

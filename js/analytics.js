@@ -1,11 +1,11 @@
 // Sistema de Analytics por Bazar
 function loadBazarAnalytics() {
-    const userBazares = JSON.parse(localStorage.getItem('userBazares') || '[]');
+    const userBazares = JSON.parse(localStorage.getItem('fashionspace_bazares') || '[]');
     const reviews = JSON.parse(localStorage.getItem('bazar_reviews') || '[]');
     const container = document.getElementById('bazarAnalytics');
     
     if (userBazares.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">Você ainda não criou nenhum bazar para analisar.</p>';
+        container.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">Você não tem nenhum bazar</p>';
         return;
     }
     

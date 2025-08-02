@@ -78,6 +78,97 @@
     </div>
 
     <script src="../js/favoritos-script.js"></script>
+    <script>
+        // Carregar favoritos
+        function loadFavorites() {
+            const favorites = JSON.parse(localStorage.getItem('fashionspace_favorites') || '[]');
+            const favoritesGrid = document.getElementById('favoritesGrid');
+            const emptyState = document.getElementById('emptyState');
+            const favoritesCount = document.getElementById('favoritesCount');
+            
+            favoritesCount.textContent = favorites.length;
+            
+            if (favorites.length === 0) {
+                emptyState.style.display = 'block';
+                favoritesGrid.style.display = 'none';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            favoritesGrid.style.display = 'grid';
+            
+            favoritesGrid.innerHTML = favorites.map(bazar => `
+                <div class="favorite-card">
+                    <img src="${bazar.image}" alt="${bazar.name}">
+                    <div class="card-content">
+                        <h3>${bazar.name}</h3>
+                        <p>${bazar.description}</p>
+                        <div class="card-info">
+                            <span><i class="fas fa-map-marker-alt"></i> ${bazar.location}</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="details-btn" onclick="window.location.href='bazar-detalhes.html?name=${encodeURIComponent(bazar.name)}'">
+                                <i class="fas fa-eye"></i> Ver Detalhes
+                            </button>
+                            <button class="remove-btn" onclick="removeFavorite('${bazar.name}')">
+                                <i class="fas fa-heart-broken"></i> Remover
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Remover favorito
+        function removeFavorite(bazarName) {
+            if (confirm(`Tem certeza que deseja remover "${bazarName}" dos favoritos?`)) {
+                let favorites = JSON.parse(localStorage.getItem('fashionspace_favorites') || '[]');
+                favorites = favorites.filter(fav => fav.name !== bazarName);
+                localStorage.setItem('fashionspace_favorites', JSON.stringify(favorites));
+                
+                showMessage(`${bazarName} removido dos favoritos`, 'success');
+                loadFavorites();
+            }
+        }
+        
+        // Mostrar mensagem
+        function showMessage(text, type) {
+            const message = document.createElement('div');
+            message.className = 'message';
+            message.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                ${text}
+            `;
+            
+            message.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : '#f44336'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                z-index: 2000;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => message.remove(), 300);
+            }, 3000);
+        }
+        
+        // Carregar favoritos quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFavorites();
+        });
+    </script>
     <script src="../js/dark-mode-global.js"></script>
     <script>
         function toggleDarkMode() {

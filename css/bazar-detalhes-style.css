@@ -574,3 +574,134 @@ body {
         flex-direction: column;
     }
 }
+
+/* RESPONSIVE - iPhone SE (375px) */
+@media (max-width: 375px) {
+    .topbar {
+        padding: 10px 15px;
+    }
+    
+    .topbar h2 {
+        font-size: 14px;
+    }
+    
+    .header-actions {
+        gap: 5px;
+    }
+    
+    .add-bazar-btn, .profile-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    .add-bazar-btn span, .profile-btn span {
+        display: none;
+    }
+    
+    .container {
+        margin: 5px;
+        border-radius: 10px;
+    }
+    
+    .header {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .header h1 {
+        font-size: 1.3rem;
+        margin: 10px 0;
+    }
+    
+    .back-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+        align-self: flex-start;
+    }
+    
+    .favorite-btn {
+        width: 35px;
+        height: 35px;
+        align-self: flex-end;
+    }
+    
+    .bazar-content {
+        padding: 15px;
+        gap: 20px;
+    }
+    
+    .carousel-container {
+        height: 200px;
+    }
+    
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    
+    .carousel-btn.prev {
+        left: 10px;
+    }
+    
+    .carousel-btn.next {
+        right: 10px;
+    }
+    
+    .carousel-dots {
+        bottom: 10px;
+    }
+    
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .info-section {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .info-section h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .category-badge {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    
+    .info-item {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+    
+    .info-item i {
+        font-size: 12px;
+        width: 15px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        padding: 10px;
+        font-size: 12px;
+    }
+    
+    .sidebar {
+        width: 280px;
+        left: -280px;
+    }
+    
+    .main-content.shifted {
+        margin-left: 0;
+    }
+}
