@@ -134,8 +134,7 @@ function removeFavorite(bazarName) {
 }
 
 function viewBazar(bazarName) {
-    showMessage(`Visualizando ${bazarName}...`, 'info');
-    // In a real app, this would navigate to the bazar details page
+    window.open(`bazar-detalhes.html?name=${encodeURIComponent(bazarName)}`, '_blank');
 }
 
 function shareBazar(bazarName) {

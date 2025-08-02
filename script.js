@@ -78,7 +78,30 @@ document.getElementById('bazarForm').addEventListener('submit', function(e) {
         return;
     }
     
-    // Simular salvamento
+    // Coletar dados do formulário
+    const formData = {
+        id: Date.now(), // ID único baseado no timestamp
+        nome: document.getElementById('nome').value.trim(),
+        cep: document.getElementById('cep').value.trim(),
+        endereco: document.getElementById('endereco').value.trim(),
+        numero: document.getElementById('numero').value.trim(),
+        bairro: document.getElementById('bairro').value.trim(),
+        cidade: document.getElementById('cidade').value.trim(),
+        telefone: document.getElementById('telefone').value.trim(),
+        horario: document.getElementById('horario').value.trim(),
+        descricao: document.getElementById('descricao').value.trim(),
+        imagem: null,
+        criadoEm: new Date().toISOString()
+    };
+    
+    // Capturar imagem se houver
+    const imagePreview = document.getElementById('imagePreview');
+    const img = imagePreview.querySelector('img');
+    if (img) {
+        formData.imagem = img.src;
+    }
+    
+    // Salvar no localStorage
     const submitBtn = document.querySelector('.submit-btn');
     const originalText = submitBtn.innerHTML;
     
@@ -86,6 +109,15 @@ document.getElementById('bazarForm').addEventListener('submit', function(e) {
     submitBtn.disabled = true;
     
     setTimeout(() => {
+        // Obter bazares existentes
+        let bazares = JSON.parse(localStorage.getItem('fashionspace_bazares')) || [];
+        
+        // Adicionar novo bazar
+        bazares.push(formData);
+        
+        // Salvar no localStorage
+        localStorage.setItem('fashionspace_bazares', JSON.stringify(bazares));
+        
         showMessage('Bazar adicionado com sucesso!', 'success');
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
@@ -130,4 +162,12 @@ function voltarPagina() {
 // Adicionar click no preview da imagem
 document.getElementById('imagePreview').addEventListener('click', function() {
     document.getElementById('imageInput').click();
+});
+
+// Verificar se está logado
+document.addEventListener('DOMContentLoaded', () => {
+    const isLoggedIn = localStorage.getItem('fashionspace_logged_in');
+    if (isLoggedIn !== 'true') {
+        window.location.href = 'login.html';
+    }
 });

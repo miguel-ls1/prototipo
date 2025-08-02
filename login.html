@@ -1,21 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <link rel="stylesheet" href="resset.css">
     <meta charset="UTF-8">
-    <title>Login - FashionSpace</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionSpace - Login</title>
+    <link rel="stylesheet" href="login-style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <main class="content">
-        <h2 class="login">Login</h2>
-        <form id="loginForm">
-            <input type="email" placeholder="Email" id="loginEmail" required >
-            <input type="password" placeholder="Senha" id="loginSenha" required>
-            <button type="submit" href="index.html">Entrar</button>
-            <p>Não tem conta? <a class="link_c" href="cadastro.html" >Cadastre-se aqui</a></p>
-        </form>
-    </main>
-    <script src="script.js"></script>
+    <div class="container">
+        <div class="form-container">
+            <div class="logo-section">
+                <img src="assets/Image.png" alt="FashionSpace Logo" class="logo">
+                <h1>FashionSpace</h1>
+                <p>Seu portal para os melhores bazares online</p>
+            </div>
+
+            <!-- Formulário de Cadastro -->
+            <div class="form-wrapper" id="registerForm">
+                <h2>Criar Conta</h2>
+                <form id="registerFormElement">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="registerName" placeholder="Nome completo" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="registerEmail" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="registerPassword" placeholder="Senha" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Cadastrar</button>
+                </form>
+                <p class="switch-form">
+                    Já tem uma conta? 
+                    <a href="#" id="showLogin">Fazer login</a>
+                </p>
+            </div>
+
+            <!-- Formulário de Login -->
+            <div class="form-wrapper hidden" id="loginForm">
+                <h2>Entrar</h2>
+                <form id="loginFormElement">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Senha" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </form>
+                <p class="switch-form">
+                    Não tem uma conta? 
+                    <a href="#" id="showRegister">Cadastre-se</a>
+                </p>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+        </div>
+    </div>
+
+    <script src="login-script.js"></script>
 </body>
 </html>

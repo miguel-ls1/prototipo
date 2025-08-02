@@ -5,34 +5,37 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #5f81a5 0%, #0f2c47 100%);
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: white;
     min-height: 100vh;
-    padding: 20px;
+    padding: 0;
+    margin: 0;
 }
 
 .container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 20px auto;
     background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
     overflow: hidden;
+    border: 1px solid #f1f3f4;
 }
 
 .header {
-    background: linear-gradient(135deg, #5f81a5, #1976D2);
-    color: white;
+    background: white;
+    color: #0f2c47;
     padding: 30px;
     position: relative;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .back-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: #6c757d;
     padding: 10px 20px;
-    border-radius: 25px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
     display: flex;
@@ -40,16 +43,18 @@ body {
     gap: 8px;
     transition: all 0.3s ease;
     margin-bottom: 15px;
+    font-weight: 600;
 }
 
 .back-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateX(-5px);
+    background: #e9ecef;
+    color: #495057;
 }
 
 .header h1 {
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
 }
 
 .bazar-form {
@@ -71,7 +76,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #2196F3;
+    color: #5f81a5;
     cursor: pointer;
     transition: all 0.3s ease;
     background: #f8f9ff;
@@ -105,7 +110,7 @@ body {
 }
 
 .upload-btn {
-    background: linear-gradient(135deg, #5f81a5, #1976D2);
+    background: linear-gradient(135deg, #5f81a5, #0f2c47);
     color: white;
     border: none;
     padding: 12px 30px;
@@ -122,7 +127,7 @@ body {
 
 .upload-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3);
+    box-shadow: 0 8px 20px rgba(95, 129, 165, 0.3);
 }
 
 .form-grid {
@@ -150,20 +155,20 @@ body {
 
 .form-group input,
 .form-group textarea {
-    padding: 15px;
-    border: 2px solid #e1e5e9;
-    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
     font-size: 16px;
     transition: all 0.3s ease;
-    background: #fafbfc;
+    background: #f8f9fa;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #2196F3;
+    border-color: #5f81a5;
     background: white;
-    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    box-shadow: 0 0 0 3px rgba(95, 129, 165, 0.1);
 }
 
 .form-group textarea {
@@ -202,13 +207,13 @@ body {
 }
 
 .submit-btn {
-    background: linear-gradient(135deg, #5f81a5, #1976D2);
+    background: #5f81a5;
     color: white;
 }
 
 .submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3);
+    background: #0f2c47;
+    transform: translateY(-1px);
 }
 
 .success-message {
@@ -231,6 +236,210 @@ body {
     display: none;
     align-items: center;
     gap: 10px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: #0f2c47;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.2);
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.sidebar-header h3 {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+}
+
+.sidebar-menu li {
+    margin: 5px 0;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin: 2px 15px;
+    font-weight: 500;
+}
+
+.sidebar-menu a:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    transform: translateX(4px);
+}
+
+.sidebar-menu i {
+    margin-right: 15px;
+    width: 20px;
+}
+
+.main-content {
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.shifted {
+    margin-left: 280px;
+}
+
+/* TOPBAR */
+.topbar {
+    background: #5f81a5;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.topbar h2 {
+    color: white;
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.search-bar i {
+    color: white;
+    margin-right: 10px;
+}
+
+.search-bar input {
+    border: none;
+    background: none;
+    outline: none;
+    flex: 1;
+    font-size: 16px;
+    color: white;
+}
+
+.search-bar input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.header-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.add-bazar-btn, .profile-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.add-bazar-btn {
+    background: white;
+    color: #5f81a5;
+}
+
+.add-bazar-btn:hover {
+    background: rgba(255,255,255,0.9);
+}
+
+.profile-btn {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.profile-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* DARK MODE */
+.dark-mode {
+    background: #1a1a1a !important;
+}
+
+.dark-mode .topbar {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .sidebar {
+    background: #1a1a1a !important;
+}
+
+.dark-mode .container {
+    background: #2d2d2d !important;
+    border-color: #4d4d4d !important;
+}
+
+.dark-mode .header {
+    background: #2d2d2d !important;
+    color: #e0e0e0 !important;
+    border-color: #4d4d4d !important;
+}
+
+.dark-mode .header h1 {
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group textarea {
+    background: #3d3d3d !important;
+    border-color: #4d4d4d !important;
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .form-group label {
+    color: #e0e0e0 !important;
 }
 
 @media (max-width: 768px) {

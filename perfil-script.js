@@ -66,36 +66,9 @@ document.getElementById('editForm').addEventListener('submit', (e) => {
     editModal.style.display = 'none';
 });
 
-// Bazar actions
-document.querySelectorAll('.action-btn.edit').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = 'editar-bazar.html';
-    });
-});
 
-document.querySelectorAll('.action-btn.delete').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (confirm('Tem certeza que deseja excluir este bazar?')) {
-            const bazarItem = btn.closest('.bazar-item');
-            bazarItem.style.opacity = '0';
-            bazarItem.style.transform = 'translateX(-100%)';
-            
-            setTimeout(() => {
-                bazarItem.remove();
-                showMessage('Bazar excluído com sucesso!', 'success');
-                updateStats();
-            }, 300);
-        }
-    });
-});
 
-// Update statistics
-function updateStats() {
-    const bazarCount = document.querySelectorAll('.bazar-item').length;
-    document.querySelector('.stat-number').textContent = bazarCount;
-}
+
 
 // Show message function
 function showMessage(text, type) {
@@ -178,8 +151,90 @@ document.getElementById('editPhone').addEventListener('input', function(e) {
     }
 });
 
+// Carregar dados do usuário
+function loadUserData() {
+    const userData = localStorage.getItem('fashionspace_user');
+    if (userData) {
+        const user = JSON.parse(userData);
+        document.getElementById('userName').textContent = user.name.split(' ')[0];
+        document.getElementById('userEmail').textContent = user.email;
+        document.getElementById('fullName').textContent = user.name;
+        document.getElementById('email').textContent = user.email;
+        document.getElementById('editFullName').value = user.name;
+        document.getElementById('editEmail').value = user.email;
+    }
+    loadUserBazares();
+}
+
+// Carregar bazares do usuário
+function loadUserBazares() {
+    const bazares = JSON.parse(localStorage.getItem('fashionspace_bazares')) || [];
+    const bazaresList = document.querySelector('.bazares-list');
+    const statNumber = document.querySelector('.stat-number');
+    
+    // Atualizar contador
+    statNumber.textContent = bazares.length;
+    
+    // Limpar lista atual
+    bazaresList.innerHTML = '';
+    
+    if (bazares.length === 0) {
+        bazaresList.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">Nenhum bazar criado ainda.</p>';
+        return;
+    }
+    
+    bazares.forEach(bazar => {
+        const bazarItem = document.createElement('div');
+        bazarItem.className = 'bazar-item';
+        bazarItem.innerHTML = `
+            <img src="${bazar.imagem || 'assets/OIP.webp'}" alt="${bazar.nome}">
+            <div class="bazar-info">
+                <h4>${bazar.nome}</h4>
+                <p>${bazar.descricao}</p>
+                <span class="status active">Ativo</span>
+            </div>
+            <div class="bazar-actions">
+                <button class="action-btn delete" onclick="deleteBazar(${bazar.id})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `;
+        bazaresList.appendChild(bazarItem);
+    });
+}
+
+// Excluir bazar
+function deleteBazar(bazarId) {
+    if (confirm('Tem certeza que deseja excluir este bazar?')) {
+        let bazares = JSON.parse(localStorage.getItem('fashionspace_bazares')) || [];
+        bazares = bazares.filter(bazar => bazar.id !== bazarId);
+        localStorage.setItem('fashionspace_bazares', JSON.stringify(bazares));
+        
+        showMessage('Bazar excluído com sucesso!', 'success');
+        loadUserBazares();
+    }
+}
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    if (confirm('Tem certeza que deseja sair?')) {
+        localStorage.removeItem('fashionspace_logged_in');
+        window.location.href = 'login.html';
+    }
+});
+
 // Initialize page
 document.addEventListener('DOMContentLoaded', () => {
+    // Verificar se está logado
+    const isLoggedIn = localStorage.getItem('fashionspace_logged_in');
+    if (isLoggedIn !== 'true') {
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    // Carregar dados do usuário
+    loadUserData();
+    
     // Add hover effects to stat cards
     document.querySelectorAll('.stat-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
