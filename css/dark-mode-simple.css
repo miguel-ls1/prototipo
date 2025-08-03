@@ -1,0 +1,50 @@
+/* MODO ESCURO SIMPLES - SEM BUGS */
+
+.dark-mode {
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .topbar {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .sidebar {
+    background: #1a1a1a !important;
+}
+
+.dark-mode .hero,
+.dark-mode .carousel-section,
+.dark-mode .bazares-grid,
+.dark-mode .categories-section,
+.dark-mode .gallery-section,
+.dark-mode .contact-section {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .bazar-card,
+.dark-mode .carousel-card,
+.dark-mode .favorite-card {
+    background: #3d3d3d !important;
+    color: #ffffff !important;
+}
+
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6 {
+    color: #ffffff !important;
+}
+
+.dark-mode p, .dark-mode span, .dark-mode div {
+    color: #f5f5f5 !important;
+}
+
+/* Sem transições para evitar elementos invisíveis */
+
+/* Sidebar fixa */
+.sidebar {
+    left: 0 !important;
+}
+
+.main-content {
+    margin-left: 280px !important;
+}
+

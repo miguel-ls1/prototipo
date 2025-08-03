@@ -7,9 +7,20 @@
     <link rel="stylesheet" href="../css/bazar-detalhes-style.css">
     <link rel="stylesheet" href="../css/reviews.css">
     <link rel="stylesheet" href="../css/dark-mode-detalhes.css">
+    <link rel="stylesheet" href="../css/chat.css">
+    <link rel="stylesheet" href="../css/dark-mode-global.css">
+    <link rel="stylesheet" href="../css/animations.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+<script>
+(function() {
+    const isDark = localStorage.getItem('darkMode') === 'true';
+    if (isDark) {
+        document.body.classList.add('dark-mode');
+    }
+})();
+</script>
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="../assets/Image.png" alt="Logo" class="sidebar-logo">
@@ -108,7 +119,11 @@
                 </div>
 
                 <div class="action-buttons">
-                    <button class="btn-primary" onclick="shareBazar()">
+                    <button class="btn-primary" onclick="openChatWithBazar()">
+                        <i class="fas fa-comments"></i>
+                        Enviar Mensagem
+                    </button>
+                    <button class="btn-secondary" onclick="shareBazar()">
                         <i class="fas fa-share"></i>
                         Compartilhar
                     </button>
@@ -166,6 +181,7 @@
     <script src="../js/reviews.js"></script>
     <script src="../js/dark-mode-global.js"></script>
     <script src="../js/analytics.js"></script>
+    <script src="../js/chat.js"></script>
     <script>
         function toggleDarkMode() {
             const isDark = localStorage.getItem('darkMode') === 'true';
@@ -577,7 +593,7 @@
                     }
                 }
             }
-        }
+        
         
         // Função de compartilhar
         function shareBazar() {
@@ -639,6 +655,25 @@
                 darkModeText.textContent = isDark ? 'Modo Claro' : 'Modo Escuro';
             }
         }
+        
+        // Função para abrir chat com o bazar
+        function openChatWithBazar() {
+            try {
+                const bazarName = document.getElementById('bazarTitle').textContent;
+                console.log('Bazar name:', bazarName);
+                const url = `chat-bazar.html?bazar=${encodeURIComponent(bazarName)}`;
+                console.log('Redirecting to:', url);
+                window.location.href = url;
+            } catch (error) {
+                console.error('Error in openChatWithBazar:', error);
+                alert('Erro ao abrir chat: ' + error.message);
+            }
+        }
+        
+        function goBack() {
+            history.back();
+        }
     </script>
+    <script src="../js/animations.js"></script>
 </body>
 </html>

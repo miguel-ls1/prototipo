@@ -14,7 +14,7 @@ body {
 
 /* SIDEBAR */
 .sidebar {
-    position: fixed;
+    position: absolute;
     left: -280px;
     top: 0;
     width: 280px;
@@ -93,7 +93,7 @@ body {
 
 /* TOPBAR */
 .topbar {
-    background: #5f81a5;
+    background: linear-gradient(135deg, #5f81a5, #0f2c47);
     padding: 20px 40px;
     display: flex;
     align-items: center;
@@ -122,7 +122,7 @@ body {
 .search-bar {
     display: flex;
     align-items: center;
-    background: rgba(255,255,255,0.2);
+    background: none;
     border-radius: 25px;
     padding: 10px 20px;
     flex: 1;
@@ -140,13 +140,17 @@ body {
 
 .search-bar input {
     border: none;
-    background: none;
+    background: transparent !important;
     outline: none;
     flex: 1;
     font-size: 14px;
     color: white;
     height: 100%;
     padding: 0;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .search-bar input::placeholder {
@@ -391,14 +395,14 @@ body {
     font-size: 3rem;
     font-weight: 800;
     margin-bottom: 20px;
-    color: #0f2c47;
+    color: #dde3e9;
     line-height: 1.1;
     letter-spacing: -1px;
 }
 
 .hero-content p {
     font-size: 1.1rem;
-    color: #6c757d;
+    color: #dae6f1;
     margin-bottom: 30px;
     line-height: 1.6;
 }
@@ -422,7 +426,7 @@ body {
 }
 
 .btn-primary {
-    background: #5f81a5;
+    background: linear-gradient(135deg, #5f81a5, #0f2c47);
     color: white;
 }
 
@@ -526,7 +530,7 @@ body {
 }
 
 .card-btn {
-    background: #5f81a5;
+    background: linear-gradient(135deg, #5f81a5, #0f2c47);
     color: white;
     border: none;
     padding: 12px 24px;
@@ -672,7 +676,7 @@ body {
 }
 
 .details-btn {
-    background: #5f81a5;
+    background: linear-gradient(135deg, #5f81a5, #0f2c47);
     color: white;
     border: none;
     padding: 8px 16px;

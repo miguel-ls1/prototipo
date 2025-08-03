@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="css/gallery.css">
     <link rel="stylesheet" href="css/chat.css">
     <link rel="stylesheet" href="css/rating-system.css">
+
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/dark-mode-simple.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Sidebar -->
+     <div class="Salvador">
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/Image.png" alt="Logo" class="sidebar-logo">
@@ -26,7 +30,7 @@
             <li><a href="#" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> <span id="darkModeText">Modo Escuro</span></a></li>
         </ul>
     </nav>
-
+</div>
     <!-- Main Content -->
     <div class="main-content">
         <!-- Top Bar -->
@@ -96,7 +100,8 @@
 
 
         <!-- Hero Section -->
-        <section class="hero">
+        <section class="hero parallax-hero">
+            <div class="parallax-bg" style="background-image: linear-gradient(rgba(95, 129, 165, 0.8), rgba(15, 44, 71, 0.8)), url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1920&h=1080&fit=crop');"></div>
             <div class="hero-content">
                 <h1>PARA TODOS,<br>MAS NÃO<br>QUALQUER UM</h1>
                 <p>Conectamos você aos melhores bazares e experiências de moda únicas. Descubra peças exclusivas e tendências autênticas.</p>
@@ -1075,21 +1080,22 @@
             loadUserBazares();
         });
         
-        // Dark mode
+        // Dark mode com atualização de página
         function toggleDarkMode() {
             const isDark = localStorage.getItem('darkMode') === 'true';
             localStorage.setItem('darkMode', !isDark);
-            applyDarkMode();
-        }
-        
-        function applyDarkMode() {
-            const isDark = localStorage.getItem('darkMode') === 'true';
-            document.body.classList.toggle('dark-mode', isDark);
-            document.getElementById('darkModeText').textContent = isDark ? 'Modo Claro' : 'Modo Escuro';
+            location.reload();
         }
         
         // Aplicar modo escuro ao carregar
-        document.addEventListener('DOMContentLoaded', applyDarkMode);
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const isDark = document.body.classList.contains('dark-mode');
+            document.getElementById('darkModeText').textContent = isDark ? 'Modo Claro' : 'Modo Escuro';
+        });
         
         // Função de busca
         function searchBazares() {
@@ -1441,5 +1447,7 @@
     <script src="js/simple-notifications.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/favorites.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/history-system.js"></script>
 </body>
 </html>

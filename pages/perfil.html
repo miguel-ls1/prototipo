@@ -7,10 +7,19 @@
     <link rel="stylesheet" href="../css/perfil-style.css">
     <link rel="stylesheet" href="../css/dark-mode-detalhes.css">
     <link rel="stylesheet" href="../css/analytics.css">
+    <link rel="stylesheet" href="../css/animations.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+<script>
+(function() {
+    const isDark = localStorage.getItem('darkMode') === 'true';
+    if (isDark) {
+        document.body.classList.add('dark-mode');
+    }
+})();
+</script>
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="../assets/Image.png" alt="Logo" class="sidebar-logo">
@@ -271,5 +280,6 @@
             }
         }
     </script>
+    <script src="../js/animations.js"></script>
 </body>
 </html>

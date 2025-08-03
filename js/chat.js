@@ -279,9 +279,44 @@ function updateChatCount() {
     }
 }
 
+// Adicionar conversa com bazar
+function addBazarConversation(bazarName) {
+    // Verificar se já existe conversa com este bazar
+    const existingChat = chatData.find(c => c.name === bazarName);
+    if (existingChat) {
+        openChat(existingChat.id);
+        return;
+    }
+    
+    // Criar nova conversa
+    const newChat = {
+        id: Date.now(),
+        name: bazarName,
+        avatar: bazarName.substring(0, 2).toUpperCase(),
+        lastMessage: 'Conversa iniciada',
+        time: new Date().getHours().toString().padStart(2, '0') + ':' + 
+              new Date().getMinutes().toString().padStart(2, '0'),
+        unread: false,
+        messages: [
+            {
+                text: `Olá! Bem-vindo ao ${bazarName}. Como posso ajudá-lo?`,
+                sent: false,
+                time: new Date().getHours().toString().padStart(2, '0') + ':' + 
+                      new Date().getMinutes().toString().padStart(2, '0')
+            }
+        ]
+    };
+    
+    chatData.unshift(newChat);
+    saveChatData();
+    loadChatList();
+    openChat(newChat.id);
+}
+
 // Exportar funções globais
 window.toggleChat = toggleChat;
 window.openChat = openChat;
 window.closeChatWindow = closeChatWindow;
 window.sendMessage = sendMessage;
 window.handleEnter = handleEnter;
+window.addBazarConversation = addBazarConversation;

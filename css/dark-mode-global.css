@@ -1,0 +1,269 @@
+/* MODO ESCURO GLOBAL - SEM TRANSIÇÕES */
+
+/* Sem transições para evitar tela em branco */
+.sidebar {
+    transition: left 0.3s ease !important;
+}
+
+.main-content {
+    transition: margin-left 0.3s ease !important;
+}
+
+/* MODO ESCURO BASE */
+.dark-mode {
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+.dark-mode body {
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+/* HEADERS E NAVEGAÇÃO */
+.dark-mode .topbar {
+    background: linear-gradient(135deg, #4d4d4d, #2d2d2d) !important;
+}
+
+.dark-mode .sidebar {
+    background: #1a1a1a !important;
+}
+
+.dark-mode .header,
+.dark-mode .profile-header,
+.dark-mode .favorites-header {
+    background: linear-gradient(135deg, #4d4d4d, #2d2d2d) !important;
+    color: #ffffff !important;
+    border-color: #4d4d4d !important;
+}
+
+/* CONTAINERS E SEÇÕES */
+.dark-mode .container,
+.dark-mode .chat-container {
+    background: #2d2d2d !important;
+    border-color: #4d4d4d !important;
+}
+
+.dark-mode .hero {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .carousel-section,
+.dark-mode .bazares-grid,
+.dark-mode .categories-section,
+.dark-mode .gallery-section {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .contact-section {
+    background: #2d2d2d !important;
+}
+
+.dark-mode footer {
+    background: #0d1117 !important;
+}
+
+/* CARDS E ELEMENTOS */
+.dark-mode .card,
+.dark-mode .bazar-card,
+.dark-mode .favorite-card,
+.dark-mode .carousel-card,
+.dark-mode .stat-card,
+.dark-mode .info-section,
+.dark-mode .details-section {
+    background: #3d3d3d !important;
+    border-color: #4d4d4d !important;
+    color: #ffffff !important;
+}
+
+/* TEXTOS MELHORADOS */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+    color: #ffffff !important;
+}
+
+.dark-mode p,
+.dark-mode span,
+.dark-mode div,
+.dark-mode label {
+    color: #f5f5f5 !important;
+}
+
+.dark-mode .card-body p,
+.dark-mode .card-content p {
+    color: #f0f0f0 !important;
+}
+
+.dark-mode .location,
+.dark-mode .phone,
+.dark-mode .hours {
+    color: #e8e8e8 !important;
+}
+
+/* INPUTS E FORMULÁRIOS */
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+    background: #3d3d3d !important;
+    color: #ffffff !important;
+    border-color: #4d4d4d !important;
+}
+
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+    color: #999 !important;
+}
+
+.dark-mode .search-bar input {
+    background: transparent !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    border: none !important;
+}
+
+/* BOTÕES COM GRADIENTE */
+.dark-mode .btn-primary,
+.dark-mode .details-btn,
+.dark-mode .card-btn,
+.dark-mode .submit-btn,
+.dark-mode .save-btn,
+.dark-mode .edit-bazar-btn,
+.dark-mode .send-btn,
+.dark-mode .upload-btn,
+.dark-mode .explore-btn,
+.dark-mode .favorites-count {
+    background: linear-gradient(135deg, #4d4d4d, #2d2d2d) !important;
+}
+
+/* CHAT */
+.dark-mode .chat-header {
+    background: linear-gradient(135deg, #4d4d4d, #2d2d2d) !important;
+}
+
+.dark-mode .chat-messages {
+    background: #1a1a1a !important;
+}
+
+.dark-mode .message.received .message-content {
+    background: #3d3d3d !important;
+    color: #ffffff !important;
+    border-color: #4d4d4d !important;
+}
+
+.dark-mode .message.sent .message-content {
+    background: linear-gradient(135deg, #4d4d4d, #2d2d2d) !important;
+}
+
+.dark-mode .chat-input {
+    background: #2d2d2d !important;
+    border-top-color: #4d4d4d !important;
+}
+
+/* DROPDOWNS E MODAIS */
+.dark-mode .search-suggestions,
+.dark-mode .history-dropdown,
+.dark-mode .filter-dropdown {
+    background: #2d2d2d !important;
+    border-color: #4d4d4d !important;
+}
+
+.dark-mode .suggestion-item,
+.dark-mode .history-item {
+    border-color: #4d4d4d !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .suggestion-item:hover,
+.dark-mode .history-item:hover {
+    background: #3d3d3d !important;
+}
+
+.dark-mode .modal-content {
+    background: #2d2d2d !important;
+    color: #ffffff !important;
+    border-color: #4d4d4d !important;
+}
+
+/* CATEGORIAS */
+.dark-mode .category-btn {
+    background: #3d3d3d !important;
+    border-color: #4d4d4d !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .category-btn:hover {
+    background: #4d4d4d !important;
+}
+
+.dark-mode .category-btn.active {
+    background: linear-gradient(135deg, #4d4d4d, #2d2d2d) !important;
+    color: white !important;
+}
+
+/* ESTADOS VAZIOS */
+.dark-mode .empty-state {
+    background: #3d3d3d !important;
+    border-color: #4d4d4d !important;
+}
+
+.dark-mode .empty-state h2,
+.dark-mode .empty-state h3 {
+    color: #ffffff !important;
+}
+
+.dark-mode .empty-state p {
+    color: #f0f0f0 !important;
+}
+
+/* HISTÓRICO */
+.dark-mode .history-section {
+    background: #2d2d2d !important;
+    border-color: #4d4d4d !important;
+}
+
+.dark-mode .history-title {
+    color: #ffffff !important;
+    border-color: #4d4d4d !important;
+}
+
+.dark-mode .history-text {
+    color: #f0f0f0 !important;
+}
+
+.dark-mode .clear-history {
+    border-color: #4d4d4d !important;
+}
+
+.dark-mode .clear-history:hover {
+    background: #4d2d2d !important;
+}
+
+/* NOTIFICAÇÕES */
+.dark-mode .notification {
+    background: #2d5a2d !important;
+}
+
+.dark-mode .notification.remove {
+    background: #5a2d2d !important;
+}
+
+/* EXCEÇÕES - ELEMENTOS QUE MANTÊM COR ORIGINAL */
+.dark-mode .reviews-section h2,
+.dark-mode .reviews-section p,
+.dark-mode .reviews-section span,
+.dark-mode .rating-summary,
+.dark-mode .rating-number,
+.dark-mode .rating-info,
+.dark-mode .rating-count,
+.dark-mode .review-item,
+.dark-mode .review-header,
+.dark-mode .review-text,
+.dark-mode .review-date {
+    color: inherit !important;
+}

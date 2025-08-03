@@ -208,7 +208,7 @@ body {
 }
 
 .submit-btn {
-    background: #5f81a5;
+    background: linear-gradient(135deg, #5f81a5, #0f2c47);
     color: white;
 }
 
@@ -319,7 +319,7 @@ body {
 
 /* TOPBAR */
 .topbar {
-    background: #5f81a5;
+    background: linear-gradient(135deg, #5f81a5, #0f2c47);
     padding: 20px 40px;
     display: flex;
     align-items: center;
@@ -520,7 +520,7 @@ body {
 }
 
 .upload-btn {
-    background: #5f81a5;
+    background: linear-gradient(135deg, #5f81a5, #0f2c47);
     color: white;
     border: none;
     padding: 10px 20px;
